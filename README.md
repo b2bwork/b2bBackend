@@ -1,6 +1,5 @@
-# GraphQL-MongoDB-Example
+# b2b Backend 
 
-All the important code is in `src/start.js`.
 
 Install, build and run:
 
