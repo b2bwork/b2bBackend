@@ -18,16 +18,27 @@ export const start = async () => {
 
 const mongodb = await MongoClient.connect(MONGO_URL);
 const User = mongodb.collection('user');
+const Category = mongodb.collection('category');
 
 const resolvers = {
       Query: {
         getuser: async (root, {_id}) => {
           return prepare(await User.findOne(ObjectId(_id)))
         },
-        login: async (root,{UserName,Password}) =>{
+        login: async (root,{Username,Password}) =>{
           return prepare(await User.findOne({
-            UserName: UserName,
+            Username: Username,
             Password: Password
+          }));
+        },
+        CheckUserName: async (root,{Username}) => {
+          return prepare(await User.findOne({
+            Username: Username
+          }));
+        },
+        listCategory: async ()=>{
+          return prepare(await Category.find({
+            unitCategory: false
           }));
         }
       },
