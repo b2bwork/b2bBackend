@@ -5,7 +5,7 @@ import {graphqlExpress, graphiqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import cors from 'cors'
 import {MONGO_URL,EXPRESS_PORT} from './config';
-import {typeDefs} from './Schema/user';
+import {typeDefs} from './Schema/index';
 const URL = 'http://localhost';
 
 const prepare = (o) => {
@@ -34,13 +34,19 @@ const resolvers = {
         CheckUserName: async (root,{Username}) => {
           return prepare(await User.findOne({
             Username: Username
-          }));
+          }))
         },
         listCategory: async ()=>{
           return prepare(await Category.find({
             unitCategory: false
-          }));
+          }))
+        },
+        listUnitCategory: async (root,{CategoryName})=>{
+          return prepare(await Category.find({
+            CategoryName: CategoryName
+          }))
         }
+
       },
       Mutation: {
         register: async (root, args) => {
