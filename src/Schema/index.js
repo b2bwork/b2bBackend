@@ -30,7 +30,7 @@ export const typeDefs =  [`
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
         listCategory(): Category
-        listUnitCategory(Name: String): 
+        listUnitCategory(CategoryName: String): 
       }
 
       type Mutation {
