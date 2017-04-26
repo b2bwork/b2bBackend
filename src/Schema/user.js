@@ -5,7 +5,8 @@ export const typeDefs =  [`
         _id: String
         Username: String
         Password: String
-        Name: String 
+        Name: String
+        Image: String 
         BirthDate: String 
         Age: Int
       }
