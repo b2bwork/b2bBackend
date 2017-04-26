@@ -18,6 +18,7 @@ export const typeDefs =  [`
       }
 
       type UnitCategory{
+        _id: String
         CategoryName: String
         Name: String
         Image: String 
@@ -30,7 +31,7 @@ export const typeDefs =  [`
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
         listCategory(): Category
-        listUnitCategory(CategoryName: String): 
+        listUnitCategory(Name: String): 
       }
 
       type Mutation {
