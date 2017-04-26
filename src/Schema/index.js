@@ -28,7 +28,7 @@ export const typeDefs =  [`
       type Query {
         getuser(_id: String): User
         login(Username: String , Password: String): User
-        CheckUserName(Username:String): User
+        CheckUsername(Username:String): User
         listCategory(): Category
         listUnitCategory(Name: String): 
       }
