@@ -24,7 +24,20 @@ export const typeDefs =  [`
         Image: String 
       }
 
+      type Review{
+        _id: String
+        ReviewerName: String
+        Reviewdata: String
+        Star : number
+      }
 
+      type DetailReview{
+        _id: String
+        ReviewerName: String
+        Reviewdata: String
+        Start: number
+        Image: [String]
+      }
 
       type Query {
         getuser(_id: String): User
