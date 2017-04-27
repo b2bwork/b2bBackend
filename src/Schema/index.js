@@ -37,13 +37,9 @@ export const typeDefs =  [`
         ReviewerName: String
         Reviewdata: String
         Start: number
-        Image: [ImageReview]
+        Image: [String]
       }
 
-      type ImageReview{
-        ReviewId: String 
-        PathImage: String 
-      }
 
       type Query {
         getuser(_id: String): User
@@ -57,6 +53,7 @@ export const typeDefs =  [`
 
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthData: String! , Age:Int!): User
+        addReview():Review
       }
       schema {
         query: Query

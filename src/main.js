@@ -19,7 +19,7 @@ export const start = async () => {
 const mongodb = await MongoClient.connect(MONGO_URL);
 const User = mongodb.collection('user');
 const Category = mongodb.collection('category');
-
+const ImageReview = mongodb.collection('ImageReview');
 const resolvers = {
       Query: {
         getuser: async (root, {_id}) => {
