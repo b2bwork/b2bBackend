@@ -43,7 +43,6 @@ export const typeDefs =  [`
       type ImageReview{
         ReviewId: String 
         PathImage: String 
-        
       }
 
       type Query {
