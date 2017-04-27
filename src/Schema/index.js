@@ -52,7 +52,7 @@ export const typeDefs =  [`
         listCategory(): Category
         listUnitCategory(Name: String): UnitCategory
         listReview(): Review
-        listUnitReview(): DetailReview
+        listDetailReview(): DetailReview
       }
 
       type Mutation {
