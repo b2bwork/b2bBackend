@@ -29,15 +29,31 @@ export const typeDefs =  [`
         Workid: String
         ReviewerName: String
         Reviewdata: String
-        Star : number
+        Star : Int
       }
 
       type DetailReview{
         _id: String
+        Workid: String
         ReviewerName: String
         Reviewdata: String
-        Start: number
+        Star: Int
         Image: [String]
+      }
+
+      type Works {
+        _id :String
+        CategoryName: String
+        WorkName: String
+        WorkerName: String
+        ScopeWork: String
+        Workdays : Int
+        DetailWork: String
+        ExperienceWorker: String
+        Price: Int
+        Queue : Int
+        TagWork : [String]
+
       }
 
 
@@ -45,15 +61,16 @@ export const typeDefs =  [`
         getuser(_id: String): User
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
-        listCategory(): Category
-        listUnitCategory(Name: String): UnitCategory
-        listReview(): Review
-        listDetailReview(): DetailReview
+        listCategory: Category
+        listUnitCategory(CategoryName: String): UnitCategory
+        listReview(Workid: String): Review
+        listDetailReview(_id: String ): DetailReview
+        listWorks(CategoryName: String ): Works
       }
 
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthData: String! , Age:Int!): User
-        addReview():Review
+        InsertReview(Workid: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
       }
       schema {
         query: Query
