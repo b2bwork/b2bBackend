@@ -26,6 +26,7 @@ export const typeDefs =  [`
 
       type Review{
         _id: String
+        Workid: String
         ReviewerName: String
         Reviewdata: String
         Star : number
@@ -36,7 +37,13 @@ export const typeDefs =  [`
         ReviewerName: String
         Reviewdata: String
         Start: number
-        Image: [String]
+        Image: [ImageReview]
+      }
+
+      type ImageReview{
+        ReviewId: String 
+        PathImage: String 
+        
       }
 
       type Query {
@@ -44,7 +51,9 @@ export const typeDefs =  [`
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
         listCategory(): Category
-        listUnitCategory(Name: String): 
+        listUnitCategory(Name: String): UnitCategory
+        listReview(): Review
+        listUnitReview(): DetailReview
       }
 
       type Mutation {
