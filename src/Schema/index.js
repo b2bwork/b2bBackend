@@ -70,6 +70,15 @@ export const typeDefs =  [`
 
       }
 
+      type Qoute {
+        CustomerId: String
+        CustomerName: String
+        FreelanceId: String
+        FreelanceName: String
+        DealPrice: Int
+        DueDate: String
+        Approve: Boolean
+      }
       type Query {
         getuser(_id: String): User
         login(Username: String , Password: String): User
@@ -84,6 +93,7 @@ export const typeDefs =  [`
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthData: String! , Age:Int!): User
         InsertReview(Workid: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
+        InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DueDate: String): Qoute
       }
       schema {
         query: Query
