@@ -9,6 +9,8 @@ export const typeDefs =  [`
         Image: String 
         BirthDate: String 
         Age: Int
+        Latitude: Float
+        Longtitude: Float
       }
 
       type Category{
