@@ -22,6 +22,7 @@ const Category = mongodb.collection('category');
 const Review = mongodb.collection('review');
 const ImageReview = mongodb.collection('imagereview');
 const Works = mongodb.collection('Works');
+const Message = mongodb.collection('ChatMessages');
 const resolvers = {
       Query: {
         getuser: async (root, {_id}) => {
@@ -96,6 +97,12 @@ const resolvers = {
         }
         );
           return res;
+      },
+      InsertMessage: async (root,{UserId1 , UserId2 , Messages}) =>{
+        const searchMessage = await Message.findOne({
+          UserId1 : UserId1, 
+          UserId2 : UserId2
+        });
       }
       }
     }
