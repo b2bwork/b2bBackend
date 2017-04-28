@@ -65,8 +65,6 @@ export const typeDefs =  [`
         UserId2: String
         Messages1: [String]
         Messages2: [String]
-        Images1: [String]
-        Images2: [String]
 
       }
 
