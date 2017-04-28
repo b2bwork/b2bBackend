@@ -98,7 +98,7 @@ const resolvers = {
         );
           return res;
       },
-      InsertMessage: async (root,{UserId1 , UserId2 , Messages,Image}) =>{
+      InsertMessage: async (root,{UserId1 , UserId2 , Message,Image}) =>{
         const searchMessage = await Message.findOne({
           UserId1 : UserId1, 
           UserId2 : UserId2
@@ -110,14 +110,25 @@ const resolvers = {
               UserId2 : UserId2
             },
             {
-              $addToSet :{
-                Messages: Messages,
+              $push :{
+                Messages: Message,
                 Image: Image
               }
             }
           );
         }else if(searchMessage == null){
-
+          const InserFirstMessage = await Message.insert(
+            {
+              UserId1: UserId1,
+              UserId2: UserId2,
+              Messages:[
+                {
+                Message: Message,
+                Image: Image
+                }
+              ]
+            }
+          )
         }
       }
       }
