@@ -26,6 +26,7 @@ export const typeDefs =  [`
 
       type Review{
         _id: String
+        WorkName: String
         Workid: String
         ReviewerName: String
         Reviewdata: String

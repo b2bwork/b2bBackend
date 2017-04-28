@@ -19,7 +19,9 @@ export const start = async () => {
 const mongodb = await MongoClient.connect(MONGO_URL);
 const User = mongodb.collection('user');
 const Category = mongodb.collection('category');
-const ImageReview = mongodb.collection('ImageReview');
+const Review = mongodb.collection('review');
+const ImageReview = mongodb.collection('imagereview');
+const Works = mongodb.collection('Works');
 const resolvers = {
       Query: {
         getuser: async (root, {_id}) => {
@@ -31,7 +33,7 @@ const resolvers = {
             Password: Password
           }));
         },
-        CheckUserName: async (root,{Username}) => {
+        CheckUsername: async (root,{Username}) => {
           return prepare(await User.findOne({
             Username: Username
           }))
@@ -45,6 +47,22 @@ const resolvers = {
           return prepare(await Category.find({
             CategoryName: CategoryName
           }))
+        },
+        listReview: async (root,{Workid})=>{
+          return prepare(await Category.find({
+            Workid: Workid
+          }))
+        },
+        listDetailReview: async (root,{_id})=>{
+          return prepare(await Category.findOne({
+            _id: _id
+          }))
+        }
+        ,
+        listWorks: async (root,{CategoryName})=>{
+          return prepare(await Works.find({
+            CategoryName: CategoryName
+          }))
         }
 
       },
@@ -53,7 +71,11 @@ const resolvers = {
           const res = await User.insert(args);
           return prepare(await User.findOne({_id: res.insertedIds[1]}))
         },
-      },
+        InsertReview: async (root,args) =>{
+        const res = await Review.insert(args);
+          return prepare(await Review.findOne({_id: res.insertedIds[1]}))
+      }
+      }
     }
     
     const schema = makeExecutableSchema({
