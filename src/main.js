@@ -90,9 +90,12 @@ const resolvers = {
                  ImageIdCard: ImageIdCard,
                  VerifyIdCard: false
           }
+        },
+        function(result){
+          return result;
         }
         );
-          return null;
+          return res;
       }
       }
     }
