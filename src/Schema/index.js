@@ -12,7 +12,7 @@ export const typeDefs =  [`
         Latitude: Float
         Longtitude: Float
         ImageIdCard: String
-        Verify: Boolean
+        VerifyIdCard: Boolean
       }
 
       type Category{
@@ -93,6 +93,7 @@ export const typeDefs =  [`
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthData: String! , Age:Int!): User
         InsertReview(Workid: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
+        InsertVerifyIdCard(_id: String , ImageIdCard: String!);
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!);
         InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DueDate: String): Qoute
       }
