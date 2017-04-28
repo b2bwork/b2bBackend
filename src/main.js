@@ -98,15 +98,26 @@ const resolvers = {
         );
           return res;
       },
-      InsertMessage: async (root,{UserId1 , UserId2 , Messages}) =>{
+      InsertMessage: async (root,{UserId1 , UserId2 , Messages,Image}) =>{
         const searchMessage = await Message.findOne({
           UserId1 : UserId1, 
           UserId2 : UserId2
         }).toString();
         if(searchMessage != null){
-          
+          const InsertMessage = await Message.updateOne(
+            {
+              UserId1 : UserId1,
+              UserId2 : UserId2
+            },
+            {
+              $addToSet :{
+                Messages: Messages,
+                Image: Image
+              }
+            }
+          );
         }else if(searchMessage == null){
-          
+
         }
       }
       }
