@@ -11,6 +11,8 @@ export const typeDefs =  [`
         Age: Int
         Latitude: Float
         Longtitude: Float
+        ImageIdCard: String
+        Verify: Boolean
       }
 
       type Category{
@@ -86,6 +88,7 @@ export const typeDefs =  [`
         listDetailReview(_id: String ): DetailReview
         listWorks(CategoryName: String ): Works
       }
+      
 
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthData: String! , Age:Int!): User
