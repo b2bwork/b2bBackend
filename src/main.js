@@ -102,7 +102,12 @@ const resolvers = {
         const searchMessage = await Message.findOne({
           UserId1 : UserId1, 
           UserId2 : UserId2
-        });
+        }).toString();
+        if(searchMessage != null){
+          
+        }else if(searchMessage == null){
+          
+        }
       }
       }
     }
