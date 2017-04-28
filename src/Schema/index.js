@@ -60,6 +60,15 @@ export const typeDefs =  [`
 
       }
 
+      type ChatMessage {
+        UserId1: String
+        UserId2: String
+        Messages1: [String]
+        Messages2: [String]
+        Images1: [String]
+        Images2: [String]
+
+      }
 
       type Query {
         getuser(_id: String): User
