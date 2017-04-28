@@ -111,8 +111,10 @@ const resolvers = {
             },
             {
               $push :{
-                Messages: Message,
+                Messages:[{
+                Message: Message,
                 Image: Image
+              }]
               }
             }
           );
