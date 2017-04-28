@@ -75,7 +75,8 @@ export const typeDefs =  [`
         FreelanceId: String
         FreelanceName: String
         DealPrice: Int
-        DueDate: String
+        DealDate: String
+        FinishDateWork: String
         Approve: Boolean
       }
       type Query {
@@ -95,7 +96,7 @@ export const typeDefs =  [`
         InsertReview(Workid: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
-        InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DueDate: String): Qoute
+        InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DealDate: String,FinishDateWork: String): Qoute
       }
       schema {
         query: Query
