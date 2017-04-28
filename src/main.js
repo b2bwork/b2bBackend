@@ -23,6 +23,7 @@ const Review = mongodb.collection('review');
 const ImageReview = mongodb.collection('imagereview');
 const Works = mongodb.collection('Works');
 const Message = mongodb.collection('ChatMessages');
+const Qoute = mongodb.collection('QouteWork');
 const resolvers = {
       Query: {
         getuser: async (root, {_id}) => {
@@ -111,10 +112,7 @@ const resolvers = {
             },
             {
               $push :{
-                Messages:[{
-                Message: Message,
-                Image: Image
-              }]
+                Messages:Message
               }
             }
           );
@@ -123,15 +121,22 @@ const resolvers = {
             {
               UserId1: UserId1,
               UserId2: UserId2,
-              Messages:[
-                {
-                Message: Message,
-                Image: Image
-                }
-              ]
+              Messages:Message
+              
             }
           )
         }
+      },
+      InserQoute: async (root,{CustomerId , CustomerName , FreelanceId , FreelanceName , DealPrice , DealDate , FinishDateWork}) =>{
+          const insertQoute = await Qoute.insert({
+            CustomerId: CustomerId,
+            CustomerName: CustomerName,
+            FreelanceId: FreelanceId,
+            FreelanceName: FreelanceName,
+            DealPrice: DealPrice,
+            DealDate: DealDate,
+            FinishDateWork: FinishDateWork
+          });
       }
       }
     }
