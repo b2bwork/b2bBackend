@@ -63,8 +63,7 @@ export const typeDefs =  [`
       type ChatMessage {
         UserId1: String
         UserId2: String
-        Messages1: [String]
-        Messages2: [String]
+        Messages: [String]
 
       }
 
@@ -91,6 +90,7 @@ export const typeDefs =  [`
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthData: String! , Age:Int!): User
         InsertReview(Workid: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
+        InsertMessage(UserId1: String! , UserId2: String! , Messages: String!);
         InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DueDate: String): Qoute
       }
       schema {
