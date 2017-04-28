@@ -77,6 +77,7 @@ export const typeDefs =  [`
         DealPrice: Int
         DealDate: String
         FinishDateWork: String
+        AffilatorId: String
         Approve: Boolean
       }
       type Query {
