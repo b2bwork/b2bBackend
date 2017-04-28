@@ -67,13 +67,32 @@ const resolvers = {
 
       },
       Mutation: {
-        register: async (root, args) => {
-          const res = await User.insert(args);
+        register: async (root, {Username,Password,Name,Image,BirthDate,Age}) => {
+          const res = await User.insert({
+            Username: Username,
+            Password: Password,
+            Name: Name,
+            Image: Image,
+            BirthDate: BirthDate,
+            Age: Age
+          });
           return prepare(await User.findOne({_id: res.insertedIds[1]}))
         },
         InsertReview: async (root,args) =>{
         const res = await Review.insert(args);
           return prepare(await Review.findOne({_id: res.insertedIds[1]}))
+      },
+        InsertVerifyIdCard: async (root,{_id,ImageIdCard}) =>{
+        const res = await User.updateOne({
+          _id: ObjectId(_id)
+        },{
+          $set: {
+                 ImageIdCard: ImageIdCard,
+                 VerifyIdCard: false
+          }
+        }
+        );
+          return null;
       }
       }
     }
