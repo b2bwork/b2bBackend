@@ -50,6 +50,10 @@ const resolvers = {
             CategoryName: CategoryName,
             UnitCategory: true
           }))
+          return (await Category.find({
+            CategoryName: CategoryName,
+            UnitCategory: true
+          }).toArray()).map(prepare)
         },
         listReview: async (root,{Workid})=>{
           return prepare(await Category.find({
