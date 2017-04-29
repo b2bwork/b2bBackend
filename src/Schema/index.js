@@ -85,10 +85,10 @@ export const typeDefs =  [`
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
         listCategory: [Category]
-        listUnitCategory(CategoryName: String): UnitCategory
-        listReview(Workid: String): Review
+        listUnitCategory(CategoryName: String): [UnitCategory]
+        listReview(Workid: String): [Review]
         listDetailReview(_id: String ): DetailReview
-        listWorks(CategoryName: String ): Works
+        listWorks(CategoryName: String ): [Works]
       }
       
 
