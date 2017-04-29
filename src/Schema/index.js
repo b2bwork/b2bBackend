@@ -84,7 +84,7 @@ export const typeDefs =  [`
         getuser(_id: String): User
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
-        listCategory: Category
+        listCategory: [Category]
         listUnitCategory(CategoryName: String): UnitCategory
         listReview(Workid: String): Review
         listDetailReview(_id: String ): DetailReview
