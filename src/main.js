@@ -40,14 +40,15 @@ const resolvers = {
             Username: Username
           }))
         },
-        listCategory: async ()=>{
-          return prepare(await Category.find({
-            unitCategory: false
-          }))
+        listCategory: async (_id,{UnitCategory})=>{
+          return (await Category.find({
+            UnitCategory: false
+          }).toArray()).map(prepare)
         },
         listUnitCategory: async (root,{CategoryName})=>{
           return prepare(await Category.find({
-            CategoryName: CategoryName
+            CategoryName: CategoryName,
+            UnitCategory: true
           }))
         },
         listReview: async (root,{Workid})=>{
@@ -127,7 +128,7 @@ const resolvers = {
           )
         }
       },
-      InserQoute: async (root,{CustomerId , CustomerName , FreelanceId , FreelanceName , DealPrice , DealDate , FinishDateWork}) =>{
+      InsertQoute: async (root,{CustomerId , CustomerName , FreelanceId , FreelanceName , DealPrice , DealDate , FinishDateWork}) =>{
           const insertQoute = await Qoute.insert({
             CustomerId: CustomerId,
             CustomerName: CustomerName,
