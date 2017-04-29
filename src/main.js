@@ -46,10 +46,6 @@ const resolvers = {
           }).toArray()).map(prepare)
         },
         listUnitCategory: async (root,{CategoryName})=>{
-          return prepare(await Category.find({
-            CategoryName: CategoryName,
-            UnitCategory: true
-          }))
           return (await Category.find({
             CategoryName: CategoryName,
             UnitCategory: true
