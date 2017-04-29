@@ -52,20 +52,20 @@ const resolvers = {
           }).toArray()).map(prepare)
         },
         listReview: async (root,{Workid})=>{
-          return prepare(await Category.find({
+          return (await Review.find({
             Workid: Workid
-          }))
+          })).toArray().map(prepare)
         },
         listDetailReview: async (root,{_id})=>{
-          return prepare(await Category.findOne({
+          return prepare(await Review.findOne({
             _id: _id
           }))
         }
         ,
         listWorks: async (root,{CategoryName})=>{
-          return prepare(await Works.find({
+          return (await Works.find({
             CategoryName: CategoryName
-          }))
+          })).toArray().map(prepare);
         }
 
       },
