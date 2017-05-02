@@ -51,13 +51,16 @@ export const typeDefs =  [`
         _id :String
         CategoryName: String
         WorkName: String
+        CoverImage: String
         WorkerName: String
+        WorkerId: String
         ScopeWork: String
         Workdays : Int
         DetailWork: String
         ExperienceWorker: String
         Price: Int
         Queue : Int
+        Image: [String]
         TagWork : [String]
 
       }
