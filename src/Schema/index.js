@@ -48,7 +48,7 @@ export const typeDefs =  [`
       }
 
       type Works {
-        _id :String
+        _id : String
         CategoryName: String
         WorkName: String
         CoverImage: String
@@ -92,6 +92,7 @@ export const typeDefs =  [`
         listReview(Workid: String): [Review]
         listDetailReview(_id: String ): DetailReview
         listWorks(CategoryName: String ): [Works]
+        DetailWork(_id: String): Works
       }
       
 

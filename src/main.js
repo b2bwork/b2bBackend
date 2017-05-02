@@ -58,13 +58,18 @@ const resolvers = {
         },
         listDetailReview: async (root,{_id})=>{
           return prepare(await Review.findOne({
-            _id: _id
+            _id: ObjectId(_id)
           }))
         },
         listWorks: async (root,{CategoryName})=>{
           return (await Works.find({
             CategoryName: CategoryName
           }).toArray()).map(prepare)
+        },
+        DetailWork: async (root,{_id})=>{
+          return prepare(await Works.findOne({
+            _id: ObjectId(_id)
+          }))
         }
 
       },
