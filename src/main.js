@@ -51,10 +51,10 @@ const resolvers = {
             UnitCategory: true
           }).toArray()).map(prepare)
         },
-        listReview: async (root,{Workid})=>{
+        listReview: async (root,{WorkId})=>{
           return (await Review.find({
-            Workid: Workid
-          })).toArray().map(prepare)
+            WorkId: WorkId.toString()
+          }).toArray()).map(prepare)
         },
         listDetailReview: async (root,{_id})=>{
           return prepare(await Review.findOne({
