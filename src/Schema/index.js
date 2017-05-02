@@ -43,6 +43,7 @@ export const typeDefs =  [`
         WorkName: String
         Workid: String
         ReviewerName: String
+        ReviewerImage: String
         Reviewdata: String
         Star: Int
         Image: [String]
