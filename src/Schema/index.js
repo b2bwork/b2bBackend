@@ -31,8 +31,9 @@ export const typeDefs =  [`
       type Review{
         _id: String
         WorkName: String
-        Workid: String
+        WorkId: String
         ReviewerName: String
+        ReviewerImage: String
         Reviewdata: String
         Star : Int
       }
@@ -89,7 +90,7 @@ export const typeDefs =  [`
         CheckUsername(Username:String): User
         listCategory: [Category]
         listUnitCategory(CategoryName: String): [UnitCategory]
-        listReview(Workid: String): [Review]
+        listReview(WorkId: String): [Review]
         listDetailReview(_id: String ): DetailReview
         listWorks(CategoryName: String ): [Works]
         DetailWork(_id: String): Works
