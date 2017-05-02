@@ -60,12 +60,11 @@ const resolvers = {
           return prepare(await Review.findOne({
             _id: _id
           }))
-        }
-        ,
+        },
         listWorks: async (root,{CategoryName})=>{
           return (await Works.find({
             CategoryName: CategoryName
-          })).toArray().map(prepare);
+          }).toArray()).map(prepare)
         }
 
       },
