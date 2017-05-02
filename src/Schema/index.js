@@ -41,7 +41,7 @@ export const typeDefs =  [`
       type DetailReview{
         _id: String
         WorkName: String
-        Workid: String
+        WorkId: String
         ReviewerName: String
         ReviewerImage: String
         Reviewdata: String
