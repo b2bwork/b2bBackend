@@ -117,7 +117,7 @@ export const typeDefs =  [`
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         EditWork(_id: String! ,CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
-
+        Addlocation(_id: String! , Latitude: Float! , Longtitude: Float!): User
     }
       schema {
         query: Query
