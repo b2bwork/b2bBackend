@@ -169,6 +169,24 @@ const resolvers = {
       /**
          * Ending for Customer
          */
+       ,
+       InsertWork: async (root,{CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
+         const insertWork = await Works.insert({
+           CategoryName: CategoryName,
+           WorkName: WorkName,
+           CoverImage: CoverImage,
+           WorkerName: WorkerName,
+           WorkerId: WorkerId,
+           ScopeWork: ScopeWork,
+           Workdays: Workdays,
+           DetailWork: DetailWork,
+           ExperienceWorker: ExperienceWorker,
+           Price: parseInt(Price),
+           TagWork: TagWork
+
+         })
+         return prepare(await Works.findOne({_id: insertWork.insertedIds[1]}))
+       }
       }
     }
     
