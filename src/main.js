@@ -4,8 +4,10 @@ import bodyParser from 'body-parser'
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import cors from 'cors'
-import {MONGO_URL,EXPRESS_PORT} from './config';
+import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH} from './config';
 import {typeDefs} from './Schema/index';
+import multer from 'multer';
+import fs from 'fs';
 const URL = 'http://localhost';
 
 const prepare = (o) => {
@@ -15,7 +17,6 @@ const prepare = (o) => {
 
 export const start = async () => {
   try {
-
 const mongodb = await MongoClient.connect(MONGO_URL);
 const User = mongodb.collection('user');
 const Category = mongodb.collection('category');
@@ -142,6 +143,17 @@ const resolvers = {
             DealDate: DealDate,
             FinishDateWork: FinishDateWork
           });
+      },
+      VerifiedReview: async (root,{WorkId,ReviewerName}) =>{
+          const verifiedReview = await Review.updateOne({
+            WorkId: WorkId,
+            ReviewerName: ReviewerName
+          },
+          {
+            $set:{
+               Verified: true
+            }
+          })
       }
       }
     }
@@ -153,8 +165,8 @@ const resolvers = {
 
     const app = express()
 
-    app.use(cors())
 
+    app.use(cors())
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
     app.use('/graphiql', graphiqlExpress({
