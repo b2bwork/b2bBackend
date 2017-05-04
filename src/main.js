@@ -75,11 +75,11 @@ const resolvers = {
             _id: ObjectId(_id)
           }))
         }
-
-      }
       /**
          * Ending for Customer
          */
+        
+      }
       ,
       Mutation: {
 
@@ -182,7 +182,8 @@ const resolvers = {
            DetailWork: DetailWork,
            ExperienceWorker: ExperienceWorker,
            Price: parseInt(Price),
-           TagWork: TagWork
+           TagWork: TagWork,
+           Verify: false
 
          })
          return prepare(await Works.findOne({_id: insertWork.insertedIds[1]}))
@@ -203,7 +204,8 @@ const resolvers = {
                DetailWork: DetailWork,
                ExperienceWorker: ExperienceWorker,
                Price: parseInt(Price),
-               TagWork: TagWork
+               TagWork: TagWork,
+               Verify: false
             }
           })
        },
