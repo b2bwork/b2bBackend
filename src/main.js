@@ -186,6 +186,26 @@ const resolvers = {
 
          })
          return prepare(await Works.findOne({_id: insertWork.insertedIds[1]}))
+       },
+       EditWork: async (root,{_id , CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
+         const editWork = await Works.updateOne({
+            _id: ObjectId(_id)
+          },
+          {
+            $set:{
+               CategoryName: CategoryName,
+               WorkName: WorkName,
+               CoverImage: CoverImage,
+               WorkerName: WorkerName,
+               WorkerId: WorkerId,
+               ScopeWork: ScopeWork,
+               Workdays: Workdays,
+               DetailWork: DetailWork,
+               ExperienceWorker: ExperienceWorker,
+               Price: parseInt(Price),
+               TagWork: TagWork
+            }
+          })
        }
       }
     }
