@@ -206,6 +206,19 @@ const resolvers = {
                TagWork: TagWork
             }
           })
+       },
+       Addlocation: async (root,{_id , Latitude , Longtitude}) =>{
+         const addlocation = await User.updateOne({
+            _id: ObjectId(_id)
+         },
+         {
+           $set:{
+             Latitude: parseFloat(Latitude) , 
+             Longtitude: parseFloat(Longtitude)
+           }
+         }
+
+         )
        }
       }
     }
