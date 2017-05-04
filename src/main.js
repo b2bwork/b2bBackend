@@ -78,7 +78,12 @@ const resolvers = {
       /**
          * Ending for Customer
          */
-        
+        ,
+       listFreelanceWorks: async (root,{WorkerId}) =>{
+         return (await Works.find({
+            WorkerId: WorkerId
+          }).toArray()).map(prepare)
+       }
       }
       ,
       Mutation: {
