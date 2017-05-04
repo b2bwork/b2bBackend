@@ -101,6 +101,7 @@ export const typeDefs =  [`
         DetailWork(_id: String): Works
 
         #Freelance
+        listFreelanceWorks(WorkerId: String!): Works
         GetDetailWork(_id: String!): Works
       }
       
