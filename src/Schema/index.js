@@ -65,6 +65,7 @@ export const typeDefs =  [`
         Queue : Int
         Image: [String]
         TagWork : [String]
+        Verify: Boolean
 
       }
 
