@@ -27,6 +27,9 @@ const Message = mongodb.collection('ChatMessages');
 const Qoute = mongodb.collection('QouteWork');
 const resolvers = {
       Query: {
+        /**
+         * Beginning for Customer
+         */
         getuser: async (root, {_id}) => {
           return prepare(await User.findOne(ObjectId(_id)))
         },
@@ -73,8 +76,16 @@ const resolvers = {
           }))
         }
 
-      },
+      }
+      /**
+         * Ending for Customer
+         */
+      ,
       Mutation: {
+
+        /**
+         * Beginning for Customer
+         */
         register: async (root, {Username,Password,Name,Image,BirthDate,Age}) => {
           const res = await User.insert({
             Username: Username,
@@ -155,6 +166,9 @@ const resolvers = {
             }
           })
       }
+      /**
+         * Ending for Customer
+         */
       }
     }
     
