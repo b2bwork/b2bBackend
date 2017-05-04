@@ -36,7 +36,7 @@ export const typeDefs =  [`
         ReviewerImage: String
         Reviewdata: String
         Star : Int
-        verified: Boolean
+        Verified: Boolean
       }
 
       type DetailReview{
@@ -87,7 +87,6 @@ export const typeDefs =  [`
         Approve: Boolean
       }
 
-      type
       type Query {
         getuser(_id: String): User
         login(Username: String , Password: String): User
@@ -107,7 +106,7 @@ export const typeDefs =  [`
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
         InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DealDate: String,FinishDateWork: String): Qoute
-        VerifiedReview(WorkId: String! ,verified: Boolean! ): Review
+        VerifiedReview(WorkId: String!,ReviewerName: String!): Review
      }
       schema {
         query: Query
