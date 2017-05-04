@@ -100,7 +100,7 @@ export const typeDefs =  [`
 
       type Mutation {
         register(Username: String! , Password: String! , Name: String! , BirthDate: String! , Age:Int!): User
-        InsertReview(Workid: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
+        InsertReview(WorkId: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
         InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DealDate: String,FinishDateWork: String): Qoute
