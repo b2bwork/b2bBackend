@@ -13,7 +13,7 @@ export const typeDefs =  [`
         Longtitude: Float
         ImageIdCard: String
         ImageBank: String
-        VerifyIdCard: Boolean
+        Verify: Boolean
       }
 
       type Category{

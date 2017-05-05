@@ -109,6 +109,13 @@ const resolvers = {
       ,
       listWorksfromFreelance: async ()=>{
         return (await Works.find({}).toArray()).map(prepare)
+      },
+      listFreelanceForVerify: async () =>{
+        return (await User.find({
+          ImageIdCard: {$ne:null},
+          ImageBank: {$ne:null},
+          Verify: false
+        }).toArray()).map(prepare)
       }
       }
       ,
