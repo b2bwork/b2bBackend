@@ -103,7 +103,7 @@ export const typeDefs =  [`
 
         #Freelance
         listFreelanceWorks(WorkerId: String!): [Works]
-        GetDetailWork(_id: String!): Works
+        GetDetailWork(_id: String!,WorkerId: String!): Works
       }
       
 
