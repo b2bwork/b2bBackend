@@ -117,6 +117,7 @@ export const typeDefs =  [`
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
         InsertQoute(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerNames: String! , DealPrice: Int! , DealDate: String! , FinishDateWork: String! ): Qoute
+        EditQoute(_id: String! , WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerNames: String! , DealPrice: Int , DealDate: String , FinishDateWork: String ): Qoute
         VerifiedReview(WorkId: String!,ReviewerName: String!): Review
 
         #Freelance 
