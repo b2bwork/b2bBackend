@@ -8,6 +8,8 @@ import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH} from './config';
 import {typeDefs} from './Schema/index';
 import multer from 'multer';
 import fs from 'fs';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 const URL = 'http://localhost';
 
 const prepare = (o) => {
@@ -179,11 +181,10 @@ const resolvers = {
              $set:{
                DealDate: DealDate,
                DealPrice:DealPrice,
-               FinishDateWork: FinishDateWork
+               FinishDateWork: FinishDateWork,
+               Approve: false
              }
-          }
-          
-          )
+          })
       },
       VerifiedReview: async (root,{WorkId,ReviewerName}) =>{
           const verifiedReview = await Review.updateOne({
@@ -282,8 +283,8 @@ const resolvers = {
     app.use('/graphiql', graphiqlExpress({
       endpointURL: '/graphql'
     }))
-
-    app.listen(EXPRESS_PORT, () => {
+    const server = createServer(app);
+    server.listen(EXPRESS_PORT, () => {
       console.log(`listen port: ${EXPRESS_PORT}`)
     })
 
