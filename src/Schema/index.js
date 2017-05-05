@@ -78,6 +78,7 @@ export const typeDefs =  [`
 
       type Qoute {
         _id: String
+        WorkId: String
         CustomerId: String
         CustomerName: String
         WorkerId: String
@@ -115,14 +116,14 @@ export const typeDefs =  [`
         InsertReview(WorkId: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
-        InsertQoute(CustomerId: String , CustomerName: String , WorkerId: String , WorkerNames: String , DealPrice: Int , DealDate: String,FinishDateWork: String): Qoute
+        InsertQoute(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerNames: String! , DealPrice: Int! , DealDate: String! , FinishDateWork: String! ): Qoute
         VerifiedReview(WorkId: String!,ReviewerName: String!): Review
 
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         EditWork(_id: String! ,CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         Addlocation(_id: String! , Latitude: Float! , Longtitude: Float!): User
-        AcceptQoute()
+        AcceptQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String!): Qoute
     }
       schema {
         query: Query
