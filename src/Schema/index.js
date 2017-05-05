@@ -12,6 +12,7 @@ export const typeDefs =  [`
         Latitude: Float
         Longtitude: Float
         ImageIdCard: String
+        ImageBank: String
         VerifyIdCard: Boolean
       }
 
@@ -113,6 +114,7 @@ export const typeDefs =  [`
         listFreelanceAndUser: [User]
         listWorksfromFreelance: [Works]
         listWorksIncomplete: [Works]
+        listFreelanceForVerify: [User]
       }
       
 
@@ -136,7 +138,6 @@ export const typeDefs =  [`
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
         InsertUnitCategory(CategoryName: String! , Name: String! , Image: String! ): UnitCategory
-
     }
       
       schema {
