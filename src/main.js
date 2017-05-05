@@ -83,6 +83,12 @@ const resolvers = {
          return (await Works.find({
             WorkerId: WorkerId
           }).toArray()).map(prepare)
+       },
+       GetDetailWork: async (root,{_id,WorkerId}) =>{
+         return prepare(await Works.findOne({
+            _id: ObjectId(_id),
+            WorkerId: WorkerId
+          }))
        }
       }
       ,
