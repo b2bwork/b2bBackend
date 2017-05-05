@@ -77,6 +77,7 @@ export const typeDefs =  [`
       }
 
       type Qoute {
+        _id: String
         CustomerId: String
         CustomerName: String
         WorkerId: String
@@ -121,6 +122,7 @@ export const typeDefs =  [`
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         EditWork(_id: String! ,CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         Addlocation(_id: String! , Latitude: Float! , Longtitude: Float!): User
+        AcceptQoute()
     }
       schema {
         query: Query
