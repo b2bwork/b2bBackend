@@ -105,8 +105,7 @@ const resolvers = {
         ,
       listFreelanceAndUser: async ()=>{
         return (await User.find({}).toArray()).map(prepare)
-      }
-      ,
+      },
       listWorksfromFreelance: async ()=>{
         return (await Works.find({}).toArray()).map(prepare)
       },
@@ -114,7 +113,12 @@ const resolvers = {
         return (await User.find({
           Verify: false
         }).toArray()).map(prepare)
-      }
+      },
+      getProfileFreelance: async (root,{_id}) =>{
+      return prepare(await User.findOne({
+            _id: ObjectId(_id)
+          }))
+        }
       }
       ,
       Mutation: {
