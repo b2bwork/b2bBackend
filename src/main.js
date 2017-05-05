@@ -155,15 +155,17 @@ const resolvers = {
           )
         }
       },
-      InsertQoute: async (root,{CustomerId , CustomerName , FreelanceId , FreelanceName , DealPrice , DealDate , FinishDateWork}) =>{
+      InsertQoute: async (root,{WorkId , CustomerId , CustomerName , FreelanceId , FreelanceName , DealPrice , DealDate , FinishDateWork}) =>{
           const insertQoute = await Qoute.insert({
+            WorkId: WorkId,
             CustomerId: CustomerId,
             CustomerName: CustomerName,
             FreelanceId: FreelanceId,
             FreelanceName: FreelanceName,
             DealPrice: DealPrice,
             DealDate: DealDate,
-            FinishDateWork: FinishDateWork
+            FinishDateWork: FinishDateWork,
+            Approve: false
           });
       },
       VerifiedReview: async (root,{WorkId,ReviewerName}) =>{
@@ -229,8 +231,21 @@ const resolvers = {
              Latitude: parseFloat(Latitude) , 
              Longtitude: parseFloat(Longtitude)
            }
-         }
-
+         })
+       },
+       AcceptQoute: async (root,{_id, WorkId , CustomerId , WorkerId}) =>{
+         const acceptQoute = await Qoute.updateOne(
+           {
+             _id: ObjectId(_id),
+             WorkId: WorkId,
+             WorkerId: WorkerId,
+             CustomerId: CustomerId
+           },
+           {
+             $set:{
+               Approve: true
+             }
+           }
          )
        }
       }
