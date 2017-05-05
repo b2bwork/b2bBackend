@@ -115,6 +115,7 @@ export const typeDefs =  [`
         listWorksfromFreelance: [Works]
         listWorksIncomplete: [Works]
         listFreelanceForVerify: [User]
+        getProfileFreelance(_id: String!): User
       }
       
 
@@ -138,7 +139,7 @@ export const typeDefs =  [`
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
         InsertUnitCategory(CategoryName: String! , Name: String! , Image: String! ): UnitCategory
-        getProfileFreelance(_id: String!): User
+        VerifyFreelance(_id: String!): User
     }
       
       schema {
