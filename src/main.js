@@ -316,7 +316,7 @@ const resolvers = {
              Image:Image
           })
         },
-        VerifyFreelance: async (root,{_id}) =>{
+        VerifyFreelanceAndUser: async (root,{_id}) =>{
           const verifyFreelance = await User.updateOne(
             { _id: ObjectId(_id)},
             {$set: {Verify:true}}
