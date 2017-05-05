@@ -167,6 +167,23 @@ const resolvers = {
             FinishDateWork: FinishDateWork,
             Approve: false
           });
+          return prepare(await Qoute.findOne({_id: insertQoute.insertedIds[1]}))
+      },
+      EditQoute: async (root,{_id , WorkId , CustomerId , WorkerId , DealPrice , DealDate , FinishDateWork}) => {
+          const editQoute = await Qoute.updateOne({
+            _id : ObjectId(_id),
+            WorkId: WorkId,
+            CustomerId:CustomerId,
+            WorkerId: WorkId
+          },{
+             $set:{
+               DealDate: DealDate,
+               DealPrice:DealPrice,
+               FinishDateWork: FinishDateWork
+             }
+          }
+          
+          )
       },
       VerifiedReview: async (root,{WorkId,ReviewerName}) =>{
           const verifiedReview = await Review.updateOne({
