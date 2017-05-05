@@ -81,6 +81,9 @@ const resolvers = {
          * Ending for Customer
          */
         ,
+      /**
+       *  Beginning for Freelance
+       */
        listFreelanceWorks: async (root,{WorkerId}) =>{
          return (await Works.find({
             WorkerId: WorkerId
@@ -92,6 +95,21 @@ const resolvers = {
             WorkerId: WorkerId
           }))
        }
+       /**
+        * Ending for Freelance
+        */
+
+        /**
+         * Beginning for Admin
+         */
+        ,
+      listFreelanceAndUser: async ()=>{
+        return (await User.find({}).toArray()).map(prepare)
+      }
+      ,
+      listWorksfromFreelance: async ()=>{
+        return (await Works.find({}).toArray()).map(prepare)
+      }
       }
       ,
       Mutation: {
