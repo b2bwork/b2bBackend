@@ -79,8 +79,8 @@ export const typeDefs =  [`
       type Qoute {
         CustomerId: String
         CustomerName: String
-        FreelanceId: String
-        FreelanceName: String
+        WorkerId: String
+        WorkerName: String
         DealPrice: Int
         DealDate: String
         FinishDateWork: String
@@ -114,7 +114,7 @@ export const typeDefs =  [`
         InsertReview(WorkId: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
-        InsertQoute(CustomerId: String , CustomerName: String , FreelanceId: String , FreelanceName: String , DealPrice: Int , DealDate: String,FinishDateWork: String): Qoute
+        InsertQoute(CustomerId: String , CustomerName: String , WorkerId: String , WorkerNames: String , DealPrice: Int , DealDate: String,FinishDateWork: String): Qoute
         VerifiedReview(WorkId: String!,ReviewerName: String!): Review
 
         #Freelance 
