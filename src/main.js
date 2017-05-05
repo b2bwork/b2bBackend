@@ -219,6 +219,9 @@ const resolvers = {
          * Ending for Customer
          */
        ,
+       /**
+        * Beginning for freelance
+        */
        InsertWork: async (root,{CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
          const insertWork = await Works.insert({
            CategoryName: CategoryName,
@@ -284,6 +287,26 @@ const resolvers = {
            }
          )
        }
+       /**
+        * Ending for Freelance
+        */
+        ,
+        /**
+         * Beginning for Admin
+         */
+        InsertCategory: async (root,{Name, Image})=>{
+           const insertCategory = await Category.insert({
+             Name: Name,
+             Image:Image
+           })
+        },
+        InsertUnitCategory: async (root,{CategoryName , Name , Image}) =>{
+          const insertUnitCategory = await Category.insert({
+             CategoryName: CategoryName,
+             Name: Name,
+             Image:Image
+          })
+        }
       }
     }
     
