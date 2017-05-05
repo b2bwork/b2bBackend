@@ -135,7 +135,7 @@ export const typeDefs =  [`
         
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
-        InsertUnitCategory(CategoryName: String , Name: String! , Image: String! ): UnitCategory
+        InsertUnitCategory(CategoryName: String! , Name: String! , Image: String! ): UnitCategory
 
     }
       
