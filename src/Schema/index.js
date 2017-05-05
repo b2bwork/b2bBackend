@@ -111,7 +111,7 @@ export const typeDefs =  [`
 
         #admin
         listFreelanceAndUser: [User]
-        
+        listWorksfromFreelance: [Works]
       }
       
 
