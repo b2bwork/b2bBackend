@@ -112,6 +112,7 @@ export const typeDefs =  [`
         #admin
         listFreelanceAndUser: [User]
         listWorksfromFreelance: [Works]
+        listWorksIncomplete: [Works]
       }
       
 
@@ -133,6 +134,8 @@ export const typeDefs =  [`
         AcceptQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String!): Qoute
         
         #Admin
+        InsertCategory(Name: String! , Image: String! ): Category
+        InsertUnitCategory(CategoryName: String , Name: String! , Image: String! ): UnitCategory
 
     }
       
