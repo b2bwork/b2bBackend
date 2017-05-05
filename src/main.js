@@ -315,6 +315,12 @@ const resolvers = {
              Name: Name,
              Image:Image
           })
+        },
+        VerifyFreelance: async (root,{_id}) =>{
+          const verifyFreelance = await User.updateOne(
+            { _id: ObjectId(_id)},
+            {$set: {Verify:true}}
+          )
         }
       }
     }
