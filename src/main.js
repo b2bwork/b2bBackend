@@ -9,6 +9,7 @@ import {typeDefs} from './Schema/index';
 import multer from 'multer';
 import fs from 'fs';
 import { createServer } from 'http';
+import { SubscriptionManager } from 'graphql-subscriptions';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 const URL = 'http://localhost';
 
@@ -228,6 +229,11 @@ const resolvers = {
                Verified: true
             }
           })
+      },
+      FinishWork: async (root,{_id}) =>{
+        const FinishWork = await Qoute.updateOne({
+          _id: ObjectId(_id)
+        },{$set:{Finishwork: true}})
       }
       /**
          * Ending for Customer
