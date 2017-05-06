@@ -88,7 +88,7 @@ export const typeDefs =  [`
         DealDate: String
         FinishDateWork: String
         AffilatorId: String
-        Approve: Boolean
+        Finishwork: Boolean
       }
 
       type Query {
@@ -130,6 +130,8 @@ export const typeDefs =  [`
         InsertQoute(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerNames: String! , DealPrice: Int! , DealDate: String! , FinishDateWork: String! ): Qoute
         EditQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String! , DealPrice: Int , DealDate: String , FinishDateWork: String ): Qoute
         VerifiedReview(WorkId: String!,ReviewerName: String!): Review
+        FinishWork(_id): Qoute
+
 
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
