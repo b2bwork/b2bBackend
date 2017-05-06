@@ -141,6 +141,7 @@ export const typeDefs =  [`
         InsertCategory(Name: String! , Image: String! ): Category
         InsertUnitCategory(CategoryName: String! , Name: String! , Image: String! ): UnitCategory
         VerifyFreelanceAndUser(_id: String!): User
+        VerifyFreelanceWork(_id: String!): Works
     }
       
       schema {

@@ -326,6 +326,10 @@ const resolvers = {
             { _id: ObjectId(_id)},
             {$set: {Verify:true}}
           )
+        },
+        VerifyFreelanceWork: async (root,{_id}) =>{
+          const verifyFreelanceWork = await Works.updateOne(
+            {_id: ObjectId(_id)},{$set:{Verify: true}})
         }
       }
     }
