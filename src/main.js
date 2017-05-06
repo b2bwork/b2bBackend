@@ -118,7 +118,12 @@ const resolvers = {
       return prepare(await User.findOne({
             _id: ObjectId(_id)
           }))
-        }
+        },
+      getDetailWork: async (root,{_id}) =>{
+        return prepare(await Works.findOne({
+            _id: ObjectId(_id)
+          }))
+      }
       }
       ,
       Mutation: {

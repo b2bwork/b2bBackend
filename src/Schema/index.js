@@ -116,6 +116,7 @@ export const typeDefs =  [`
         listWorksIncomplete: [Works]
         listFreelanceForVerify: [User]
         getProfileFreelance(_id: String!): User
+        getDetailWork(_id: String!): Works
       }
       
 
