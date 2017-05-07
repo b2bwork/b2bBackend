@@ -114,6 +114,7 @@ export const typeDefs =  [`
         listDetailReview(_id: String ): DetailReview
         listWorks(CategoryName: String ): [Works]
         DetailWork(_id: String): Works
+        listFreelancelocation(Latitude: Float! , Longtitude: Float): User
 
         #Co-op
         listCategory: [Category]
@@ -122,6 +123,7 @@ export const typeDefs =  [`
         #Freelance
         listFreelanceWorks(WorkerId: String!): [Works]
         GetDetailWork(_id: String!,WorkerId: String!): Works
+        AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
 
         #admin
         listFreelanceAndUser: [User]
