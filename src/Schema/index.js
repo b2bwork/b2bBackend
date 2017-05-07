@@ -69,6 +69,19 @@ export const typeDefs =  [`
         Verify: Boolean
 
       }
+      
+      type Calendar{
+        _id: String
+        WorkId: String
+        WorkName: String
+        WorkerId: String
+        WorkerName: String
+        CustomerId: String
+        CustomerName: String
+        StartWorkDate: String
+        FinishWorkDate: String
+
+      }
 
       type ChatMessage {
         UserId1: String
