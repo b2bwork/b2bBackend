@@ -28,6 +28,7 @@ const ImageReview = mongodb.collection('imagereview');
 const Works = mongodb.collection('Works');
 const Message = mongodb.collection('ChatMessages');
 const Qoute = mongodb.collection('QouteWork');
+const Calendar = mongodb.collection('Calendar');
 const resolvers = {
       Query: {
         /**
@@ -63,7 +64,7 @@ const resolvers = {
             WorkId: WorkId.toString()
           }).toArray()).map(prepare)
         },
-        listDetailReview: async (root,{_id})=>{
+        GetDetailReview: async (root,{_id})=>{
           return prepare(await Review.findOne({
             _id: ObjectId(_id)
           }))
@@ -75,6 +76,19 @@ const resolvers = {
         },
         DetailWork: async (root,{_id})=>{
           return prepare(await Works.findOne({
+            _id: ObjectId(_id)
+          }))
+        },
+        listFreelancelocation: async (root,{Latitude , Longtitude}) =>{
+          return (await Review.find({
+            $and:[{
+              Latitude : {$lte: 0.59971,$gte: 0.59971 },
+              Longtitude: {$lte: 0.59971,$gte: 0.59971 }
+            }]
+          }).toArray()).map(prepare)
+        },
+        GetFreelancelocation: async (root,{_id}) =>{
+          return prepare(await User.findOne({
             _id: ObjectId(_id)
           }))
         }
@@ -234,6 +248,21 @@ const resolvers = {
         const FinishWork = await Qoute.updateOne({
           _id: ObjectId(_id)
         },{$set:{Finishwork: true}})
+      },
+      AddFreelanceWorkSchedule: async (root,{WorkId , WorkName , WorkerId , WorkerName , CustomerId , CustomerName , StartWorkDate , FinishWorkDate}) =>{
+        const AddFreelanceWorkSchedule = await Calendar.insert({
+            WorkId: WorkId ,
+            WorkName: WorkName , 
+            WorkerId: WorkerId , 
+            WorkerName: WorkerName ,
+            CustomerId: CustomerId , 
+            CustomerName: CustomerName , 
+            StartWorkDate: StartWorkDate , 
+            FinishWorkDate: FinishWorkDate,
+            FreelanceCalendar: false,
+            CustomerCalendar: true
+
+         })
       }
       /**
          * Ending for Customer
@@ -306,6 +335,21 @@ const resolvers = {
              }
            }
          )
+       },
+       AddWorkSchedule: async(root,{WorkId , WorkName , WorkerId , WorkerName , CustomerId , CustomerName , StartWorkDate , FinishWorkDate}) => {
+         const addWorkSchedule = await Calendar.insert({
+            WorkId: WorkId ,
+            WorkName: WorkName , 
+            WorkerId: WorkerId , 
+            WorkerName: WorkerName ,
+            CustomerId: CustomerId , 
+            CustomerName: CustomerName , 
+            StartWorkDate: StartWorkDate , 
+            FinishWorkDate: FinishWorkDate,
+            FreelanceCalendar: true,
+            CustomerCalendar: false
+
+         })
        }
        /**
         * Ending for Freelance
