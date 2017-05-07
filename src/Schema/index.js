@@ -80,6 +80,8 @@ export const typeDefs =  [`
         CustomerName: String
         StartWorkDate: String
         FinishWorkDate: String
+        FreelanceCalendar: Boolean
+        CustomerCalendar: Boolean
 
       }
 
@@ -123,7 +125,7 @@ export const typeDefs =  [`
         #Freelance
         listFreelanceWorks(WorkerId: String!): [Works]
         GetDetailWork(_id: String!,WorkerId: String!): Works
-        AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
+        
 
         #admin
         listFreelanceAndUser: [User]
@@ -145,7 +147,8 @@ export const typeDefs =  [`
         InsertQoute(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerNames: String! , DealPrice: Int! , DealDate: String! , FinishDateWork: String! ): Qoute
         EditQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String! , DealPrice: Int , DealDate: String , FinishDateWork: String ): Qoute
         VerifiedReview(WorkId: String!,ReviewerName: String!): Review
-        FinishWork(_id): Qoute
+        FinishWork(_id: String!): Qoute
+        AddFreelanceWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
 
 
         #Freelance 
@@ -153,7 +156,8 @@ export const typeDefs =  [`
         EditWork(_id: String! ,CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         Addlocation(_id: String! , Latitude: Float! , Longtitude: Float!): User
         AcceptQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String!): Qoute
-        
+        AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
+
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
         InsertUnitCategory(CategoryName: String! , Name: String! , Image: String! ): UnitCategory
