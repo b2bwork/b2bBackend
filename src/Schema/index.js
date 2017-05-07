@@ -113,10 +113,11 @@ export const typeDefs =  [`
         login(Username: String , Password: String): User
         CheckUsername(Username:String): User
         listReview(WorkId: String): [Review]
-        listDetailReview(_id: String ): DetailReview
+        GetDetailReview(_id: String ): DetailReview
         listWorks(CategoryName: String ): [Works]
         DetailWork(_id: String): Works
-        listFreelancelocation(Latitude: Float! , Longtitude: Float): User
+        listFreelancelocation(Latitude: Float! , Longtitude: Float): [User]
+        GetFreelancelocation(_id:String!): User
 
         #Co-op
         listCategory: [Category]
