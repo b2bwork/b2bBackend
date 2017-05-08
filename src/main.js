@@ -4,15 +4,15 @@ import bodyParser from 'body-parser'
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import cors from 'cors'
-import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH} from './config';
+import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH,WEBSOCKET_PORT} from './config';
 import {typeDefs} from './Schema/index';
 import multer from 'multer';
 import fs from 'fs';
 import { createServer } from 'http';
-import { SubscriptionManager } from 'graphql-subscriptions';
+import {PubSub, SubscriptionManager} from "graphql-subscriptions";
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 const URL = 'http://localhost';
-
+const pubsub = new PubSub();
 const prepare = (o) => {
   o._id = o._id.toString()
   return o
@@ -397,6 +397,7 @@ const resolvers = {
       typeDefs,
       resolvers
     })
+    const subscriptionManager = new SubscriptionManager({schema, pubsub});
 
     const app = express()
 
@@ -411,6 +412,24 @@ const resolvers = {
     server.listen(EXPRESS_PORT, () => {
       console.log(`listen port: ${EXPRESS_PORT}`)
     })
+    const appWS = createServer((request, response) => {
+    response.writeHead(404);
+    response.end();
+    });
+  
+    appWS.listen(WEBSOCKET_PORT,() => {
+       console.log(`Websocket listening on port ${WEBSOCKET_PORT}`)
+    })
+
+    const subscriptionServer = new SubscriptionServer({
+        onConnect: async(connectionParams) => {
+           console.log('WebSocket connection established');
+        },
+        subscriptionManager: subscriptionManager
+        }, {
+         server: appWS,
+         path: '/subscriptions'
+        })
 
   } catch (e) {
     console.log(e)
