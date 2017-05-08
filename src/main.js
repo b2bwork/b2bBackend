@@ -153,7 +153,8 @@ const resolvers = {
             Name: Name,
             Image: Image,
             BirthDate: BirthDate,
-            Age: Age
+            Age: Age,
+            Money: null
           });
           return prepare(await User.findOne({_id: res.insertedIds[1]}))
         },
@@ -350,6 +351,11 @@ const resolvers = {
             CustomerCalendar: false
 
          })
+       },
+       MoneyUpdate: async (root,{_id , Money}) =>{
+         const moneyUpdate = await User.updateOne({
+           _id: ObjectId(_id)
+         },{$inc: {Money: Money}})
        }
        /**
         * Ending for Freelance
