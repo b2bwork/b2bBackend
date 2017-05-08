@@ -159,7 +159,7 @@ export const typeDefs =  [`
         Addlocation(_id: String! , Latitude: Float! , Longtitude: Float!): User
         AcceptQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String!): Qoute
         AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
-        MoneyUpdate(_id:string , Money): User
+        MoneyUpdate(_id:String! , Money:Float!): User
 
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
