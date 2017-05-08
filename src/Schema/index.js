@@ -167,9 +167,16 @@ export const typeDefs =  [`
         VerifyFreelanceAndUser(_id: String!): User
         VerifyFreelanceWork(_id: String!): Works
     }
+
+    type Subscription {
+        
+        #Customer
+        Message(UserId:String!): ChatMessage
+    }
       
       schema {
         query: Query
         mutation: Mutation
+        subscription: Subscription
       }
     `];
