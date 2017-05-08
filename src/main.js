@@ -29,6 +29,7 @@ const Works = mongodb.collection('Works');
 const Message = mongodb.collection('ChatMessages');
 const Qoute = mongodb.collection('QouteWork');
 const Calendar = mongodb.collection('Calendar');
+const CustomerTranferMoney = mongodb.collection('CustomerTranferMoney');
 const resolvers = {
       Query: {
         /**
@@ -264,6 +265,17 @@ const resolvers = {
             CustomerCalendar: true
 
          })
+      },
+      TranferMoney: async (root,{CustomerId , CustomerName , WorkerId, WorkerName , DealPrice}) =>{
+        const tranferMoney = await CustomerTranferMoney.insert({
+            CustomerId: CustomerId ,
+            CustomerName:CustomerName ,
+            WorkerId: WorkerId ,
+            WorkerName:WorkerName ,
+            DealPrice: DealPrice,
+            Token: null,
+            Activated: false
+        })
       }
       /**
          * Ending for Customer
