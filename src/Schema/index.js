@@ -107,6 +107,16 @@ export const typeDefs =  [`
         Finishwork: Boolean
       }
 
+      type CustomerTranferMoney{
+        _id: String
+        CustomerId: String
+        CustomerName: String
+        WorkerId: String
+        WorkerName: String
+        DealPrice: Int
+        Token: String
+        Activated: Boolean
+      }
       type Query {
 
         #Customer
