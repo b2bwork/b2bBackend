@@ -162,6 +162,7 @@ export const typeDefs =  [`
         FinishWork(_id: String!): Qoute
         AddFreelanceWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
         TranferMoney(CustomerId: String , CustomerName: String , WorkerId: String , WorkerName: String , DealPrice: Int): CustomerTranferMoney
+        CheckActivateTranferMoney(_id: String! , Token: String!): CustomerTranferMoney
 
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
