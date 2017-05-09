@@ -4,7 +4,7 @@ import bodyParser from 'body-parser'
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import cors from 'cors'
-import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH,WEBSOCKET_PORT} from './config';
+import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH,WEBSOCKET_PORT,OMISE_SECRET_KEY,OMISE_PUBLIC_KEY} from './config';
 import {typeDefs} from './Schema/index';
 import multer from 'multer';
 import fs from 'fs';
@@ -12,11 +12,16 @@ import { createServer } from 'http';
 import {PubSub, SubscriptionManager} from "graphql-subscriptions";
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 const URL = 'http://localhost';
+const omise = require('omise')({
+  'publicKey': OMISE_PUBLIC_KEY,
+  'secretKey': OMISE_SECRET_KEY
+})
 const pubsub = new PubSub();
 const prepare = (o) => {
   o._id = o._id.toString()
   return o
 }
+
 
 export const start = async () => {
   try {
