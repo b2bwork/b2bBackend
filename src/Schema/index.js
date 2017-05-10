@@ -166,7 +166,7 @@ export const typeDefs =  [`
         AddFreelanceWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
         VerifyCustomerBankCard(_id: String! , Name:String! , Email:String! , CardNumber: String! , ExpireMonth: Int! , ExpireYear: Int! , City: String! , PostalCode: String! ):User
         TranferMoney(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerName: String! , DealPrice: Int!): CustomerTransferMoney
-        CheckActivateTransferMoney(_id: String! , Token: String!): CustomerTransferMoney
+        CheckActivateTransferMoney(_id:String! , WorkerId: String! , Token: String!): CustomerTransferMoney
 
         #CO-OP (Customer , Freelance )
           #AddBankCard(): User
@@ -177,7 +177,7 @@ export const typeDefs =  [`
         Addlocation(_id: String! , Latitude: Float! , Longtitude: Float!): User
         AcceptQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String!): Qoute
         AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
-        CheckTransferMoney(_id:String , Token:String!): User
+        CheckTransferMoney(_id:String! ,WorkerId:String!, Token:String!): User
 
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
