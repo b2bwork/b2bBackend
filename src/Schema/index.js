@@ -15,6 +15,7 @@ export const typeDefs =  [`
         ImageBank: String
         Verify: Boolean
         Money: Float
+        TokenOmise: String
       }
 
       type Category{
