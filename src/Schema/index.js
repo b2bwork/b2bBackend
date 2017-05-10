@@ -166,7 +166,7 @@ export const typeDefs =  [`
         AddFreelanceWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
         VerifyCustomerBankCard(_id: String! , Name:String! , Email:String! , CardNumber: String! , ExpireMonth: Int! , ExpireYear: Int! , City: String! , PostalCode: String! ):User
         TranferMoney(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerName: String! , DealPrice: Int!): CustomerTranferMoney
-        #CheckActivateTranferMoney(_id: String! , Token: String!): CustomerTranferMoney
+        CheckActivateTranferMoney(_id: String! , Token: String!): CustomerTranferMoney
 
         #CO-OP (Customer , Freelance )
           #AddBankCard(): User
