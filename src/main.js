@@ -319,7 +319,7 @@ const resolvers = {
              }});
           })
        },
-       CheckActivateTransferMoney: async (root,{_id,Token}) =>{
+       CheckActivateTransferMoney: async (root,{_id,WorkerId,Token}) =>{
           const check = omise.transfers.retrieve(Token).then( async (data)=>{
             if(data.sent == true){
 
@@ -328,6 +328,11 @@ const resolvers = {
               },{$set:{
                 Activated: true
               }})
+              const moneyUpdate = await User.updateOne({
+                     _id: ObjectId(WorkerId)
+                   },{$inc: {Money: data.amount}})
+            }else if(data.sent == false){
+              return "Token cannot pass"
             }
           })
        }
@@ -419,10 +424,22 @@ const resolvers = {
 
          })
        },
-       MoneyUpdate: async (root,{_id , Money}) =>{
-         const moneyUpdate = await User.updateOne({
-           _id: ObjectId(_id)
-         },{$inc: {Money: Money}})
+       CheckTransferMoney: async (root,{_id ,WorkerId , Token}) =>{
+        const check = omise.transfers.retrieve(Token).then( async (data)=>{
+            if(data.sent == true){
+
+              const Activated = await CustomerTranferMoney.updateOne({
+                _id: ObjectId(_id)
+              },{$set:{
+                Activated: true
+              }})
+              const moneyUpdate = await User.updateOne({
+                      _id: ObjectId(_id)
+                   },{$inc: {Money: data.amount}})
+            }else if(data.sent == false){
+              return "Token cannot pass"
+            }
+          })
        }
        /**
         * Ending for Freelance
