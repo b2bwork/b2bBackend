@@ -274,7 +274,6 @@ const resolvers = {
          })
       },
       TranferMoney: async (root,{WorkId , CustomerId , CustomerName , WorkerId, WorkerName , DealPrice}) =>{
-        //const checkWorkerId = await prepare(Qoute.findOne({WorkID: WorkId,CustomerId:CustomerId,WorkerId:WorkerId}));
         const getWorkerToken =  prepare( await User.findOne({
                                          _id: ObjectId(WorkId) 
                                      }));
@@ -318,6 +317,18 @@ const resolvers = {
              },{$set:{
                   TokenOmise: Token.id
              }});
+          })
+       },
+       CheckActivateTransferMoney: async (root,{_id,Token}) =>{
+          const check = omise.transfers.retrieve(Token).then( async (data)=>{
+            if(data.sent == true){
+
+              const Activated = await CustomerTranferMoney.updateOne({
+                _id: ObjectId(_id)
+              },{$set:{
+                Activated: true
+              }})
+            }
           })
        }
       /**
