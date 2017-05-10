@@ -11,12 +11,10 @@ import fs from 'fs';
 import { createServer } from 'http';
 import {PubSub, SubscriptionManager} from "graphql-subscriptions";
 import { SubscriptionServer } from 'subscriptions-transport-ws';
+import {createcard} from './omise';
 const URL = 'http://localhost';
-const omise = require('omise')({
-  'publicKey': OMISE_PUBLIC_KEY,
-  'secretKey': OMISE_SECRET_KEY
-})
 const pubsub = new PubSub();
+
 const prepare = (o) => {
   o._id = o._id.toString()
   return o
