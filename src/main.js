@@ -14,6 +14,10 @@ import { SubscriptionServer } from 'subscriptions-transport-ws';
 import {createcard} from './omise';
 const URL = 'http://localhost';
 const pubsub = new PubSub();
+const omise = require('omise')({
+  'publicKey': OMISE_PUBLIC_KEY,
+  'secretKey': OMISE_SECRET_KEY
+})
 
 const prepare = (o) => {
   o._id = o._id.toString()
