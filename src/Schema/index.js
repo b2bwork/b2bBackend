@@ -118,6 +118,7 @@ export const typeDefs =  [`
         Token: String
         Activated: Boolean
       }
+
       type Query {
 
         #Customer
@@ -162,9 +163,12 @@ export const typeDefs =  [`
         VerifiedReview(WorkId: String!,ReviewerName: String!): Review
         FinishWork(_id: String!): Qoute
         AddFreelanceWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
-        TranferMoney(CustomerId: String , CustomerName: String , WorkerId: String , WorkerName: String , DealPrice: Int): CustomerTranferMoney
-        CheckActivateTranferMoney(_id: String! , Token: String!): CustomerTranferMoney
+        VerifyCustomerBankCard(_id: String! , CardNumber: String! , ExpireMonth: Int! , ExpireYear: Int! , City: String! , PostalCode: String! ):User
+        #TranferMoney(CustomerId: String , CustomerName: String , WorkerId: String , WorkerName: String , DealPrice: Int): CustomerTranferMoney
+        #CheckActivateTranferMoney(_id: String! , Token: String!): CustomerTranferMoney
 
+        #CO-OP (Customer , Freelance )
+        AddBankCard(): User
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
         EditWork(_id: String! ,CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
