@@ -285,7 +285,7 @@ const resolvers = {
             Activated: false
         })
       },VerifyCustomerBankCard: async (root,{_id , Name , Email , CardNumber , ExpireMonth , ExpireYear , City , PostalCode}) => {
-        var cardDetail = {
+        let cardDetail = {
              card: {
                 'name': Name,
                 'city': City,
@@ -302,7 +302,7 @@ const resolvers = {
                card: Token.id
              });
 
-              insertBankCard = await User.updateOne({
+              const insertBankCard = await User.updateOne({
                _id: ObjectId(_id)
              },{$set:{
                   TokenOmise: Token.id
