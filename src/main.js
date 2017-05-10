@@ -273,17 +273,28 @@ const resolvers = {
 
          })
       },
-      TranferMoney: async (root,{CustomerId , CustomerName , WorkerId, WorkerName , DealPrice}) =>{
-        //const tranferMoneyOmise = omise.transfers.
-        const inserttoken = await CustomerTranferMoney.insert({
-            CustomerId: CustomerId ,
-            CustomerName:CustomerName ,
-            WorkerId: WorkerId ,
-            WorkerName:WorkerName ,
-            DealPrice: DealPrice,
-            Token: null,
-            Activated: false
-        })
+      TranferMoney: async (root,{WorkId , CustomerId , CustomerName , WorkerId, WorkerName , DealPrice}) =>{
+        //const checkWorkerId = await prepare(Qoute.findOne({WorkID: WorkId,CustomerId:CustomerId,WorkerId:WorkerId}));
+        const getWorkerToken =  prepare( await User.findOne({
+                                         _id: ObjectId(WorkId) 
+                                     }));
+               if(getWorkerToken.TokenOmise != null){
+                 const tranferMoneyOmise = await omise.transfers.create({'amount': parseInt(DealPrice)
+                                  , 'recipient': getWorkerToken.TokenOmise})
+                         .then(async (Token) =>{
+                            const AddTranferToken = await CustomerTranferMoney.insert({
+                            WorkId: WorkId,
+                            CustomerId: CustomerId ,
+                            CustomerName:CustomerName ,
+                            WorkerId: WorkerId ,
+                            WorkerName:WorkerName ,
+                            DealPrice: DealPrice,
+                            Token: Token.id,
+                            Activated: false
+                        })
+          
+        }).error((err)=> console.log(err))
+               }
       },VerifyCustomerBankCard: async (root,{_id , Name , Email , CardNumber , ExpireMonth , ExpireYear , City , PostalCode}) => {
         let cardDetail = {
              card: {
