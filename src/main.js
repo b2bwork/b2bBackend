@@ -274,7 +274,8 @@ const resolvers = {
          })
       },
       TranferMoney: async (root,{CustomerId , CustomerName , WorkerId, WorkerName , DealPrice}) =>{
-        const tranferMoney = await CustomerTranferMoney.insert({
+        //const tranferMoneyOmise = omise.transfers.
+        const inserttoken = await CustomerTranferMoney.insert({
             CustomerId: CustomerId ,
             CustomerName:CustomerName ,
             WorkerId: WorkerId ,
@@ -283,10 +284,35 @@ const resolvers = {
             Token: null,
             Activated: false
         })
-      }
+      },VerifyCustomerBankCard: async (root,{_id , Name , Email , CardNumber , ExpireMonth , ExpireYear , City , PostalCode}) => {
+        var cardDetail = {
+             card: {
+                'name': Name,
+                'city': City,
+                'postal_code': PostalCode,
+                'number': CardNumber,
+                'expiration_month': parseInt(ExpireMonth),
+                'expiration_year': parseInt(ExpireYear)
+              }
+};
+          const Omise = omise.tokens.create(cardDetail).then(async (Token)=>{
+             omise.customers.create({
+               email: Email,
+               description: `ชื่อลูกค้า: ${Name}`,
+               card: Token.id
+             });
+
+              insertBankCard = await User.updateOne({
+               _id: ObjectId(_id)
+             },{$set:{
+                  TokenOmise: Token.id
+             }});
+          })
+       }
       /**
          * Ending for Customer
          */
+
        ,
        /**
         * Beginning for freelance
