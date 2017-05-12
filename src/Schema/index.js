@@ -120,6 +120,14 @@ export const typeDefs =  [`
         Activated: Boolean
       }
 
+      type CustomerProblemPost{
+        _id: String
+        DetailProblem: String
+        ImageProblem: [String]
+        Latitude: Float
+        Longtitude: Float
+      }
+
       type Query {
 
         #Customer
