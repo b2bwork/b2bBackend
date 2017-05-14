@@ -28,6 +28,8 @@ const prepare = (o) => {
 export const start = async () => {
   try {
 const mongodb = await MongoClient.connect(MONGO_URL);
+
+//mongoDB
 const User = mongodb.collection('user');
 const Category = mongodb.collection('category');
 const Review = mongodb.collection('review');
@@ -38,6 +40,9 @@ const Qoute = mongodb.collection('QouteWork');
 const Calendar = mongodb.collection('Calendar');
 const CustomerTranferMoney = mongodb.collection('CustomerTranferMoney');
 const CustomerProblem = mongodb.collection('CustomerProblem')
+
+//Graphql data
+let ListFreelanceAcceptWork = [];
 const resolvers = {
       Query: {
         /**
@@ -100,6 +105,12 @@ const resolvers = {
           return prepare(await User.findOne({
             _id: ObjectId(_id)
           }))
+        },
+        ListFreelanceAcceptWork: async (root,{_id}) =>{
+          return ListFreelanceAcceptWork.filter((x)=>{
+            return (x._id = _id)
+          })
+
         }
       /**
          * Ending for Customer
