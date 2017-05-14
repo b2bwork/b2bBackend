@@ -187,6 +187,7 @@ export const typeDefs =  [`
         TranferMoney(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerName: String! , DealPrice: Int!): CustomerTransferMoney
         CheckActivateTransferMoney(_id:String! , WorkerId: String! , Token: String!): CustomerTransferMoney
         PostProblem( CustomerId: String , DetailProblem: String , ImageProblem: [String] , Latitude: Float , Longtitude: Float ,  Category: String , Tags: [String]): CustomerProblemPost
+        ChooseFreelanceSolve(WorkerId: String!): FreelanceAcceptWork
       
 
         #CO-OP (Customer , Freelance )
