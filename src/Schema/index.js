@@ -201,7 +201,7 @@ export const typeDefs =  [`
         AcceptQoute(_id: String! , WorkId: String! , CustomerId: String! , WorkerId: String!): Qoute
         AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
         CheckTransferMoney(_id:String! ,WorkerId:String!, Token:String!): User
-        AcceptCustomerProblem(CustomerProblemId: String , WorkerId: String , QoutePrice: Int): FreelanceAcceptWork
+        AcceptCustomerProblem(_id:String! , CustomerProblemId: String! , WorkerId: String! , QoutePrice: Int!): FreelanceAcceptWork
 
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
