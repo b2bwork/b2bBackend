@@ -133,7 +133,7 @@ export const typeDefs =  [`
       type FreelanceAcceptWork{
         _id: String
         CustomerProblemId: String
-        FreelanceId: String 
+        WorkerId: String 
         QoutePrice: Int
       }
 
@@ -150,6 +150,7 @@ export const typeDefs =  [`
         listFreelancelocation(Latitude: Float! , Longtitude: Float): [User]
         GetFreelancelocation(_id:String!): User
         ListFreelanceAcceptWork(_id:String!): FreelanceAcceptWork
+        
 
         #Co-op
         listCategory: [Category]
