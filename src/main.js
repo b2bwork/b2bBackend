@@ -476,6 +476,13 @@ const resolvers = {
               return "Token cannot pass"
             }
           })
+       },
+       AcceptCustomerProblem: async (root,{CustomerProblemId , WorkerId , QoutePrice}) =>{
+         ListFreelanceAcceptWork.push({
+            CustomerProblemId: CustomerProblemId,
+            WorkerId: WorkerId,
+            QoutePrice: parseInt(QoutePrice)
+         });
        }
        /**
         * Ending for Freelance
