@@ -178,7 +178,7 @@ export const typeDefs =  [`
         VerifyCustomerBankCard(_id: String! , Name:String! , Email:String! , CardNumber: String! , ExpireMonth: Int! , ExpireYear: Int! , City: String! , PostalCode: String! ):User
         TranferMoney(WorkId: String! , CustomerId: String! , CustomerName: String! , WorkerId: String! , WorkerName: String! , DealPrice: Int!): CustomerTransferMoney
         CheckActivateTransferMoney(_id:String! , WorkerId: String! , Token: String!): CustomerTransferMoney
-        PostProblem( DetailProblem: String , ImageProblem: [String] , Latitude: Float , Longtitude: Float ,  Category: String , Tags: [String]): CustomerProblemPost
+        PostProblem( CustomerId: String , DetailProblem: String , ImageProblem: [String] , Latitude: Float , Longtitude: Float ,  Category: String , Tags: [String]): CustomerProblemPost
       
 
         #CO-OP (Customer , Freelance )
