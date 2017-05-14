@@ -37,6 +37,7 @@ const Message = mongodb.collection('ChatMessages');
 const Qoute = mongodb.collection('QouteWork');
 const Calendar = mongodb.collection('Calendar');
 const CustomerTranferMoney = mongodb.collection('CustomerTranferMoney');
+const CustomerProblem = mongodb.collection('CustomerProblem')
 const resolvers = {
       Query: {
         /**
@@ -440,6 +441,18 @@ const resolvers = {
               return "Token cannot pass"
             }
           })
+       },
+       PostProblem: async (root,{CustomerId , DetailProblem , ImageProblem , Latitude , Longtitude ,  Category , Tags}) =>{
+         const postproblem = await CustomerProblem.insert({
+           CustomerId: CustomerId , 
+           DetailProblem: DetailProblem , 
+           ImageProblem: ImageProblem , 
+           Latitude: Latitude , 
+           Longtitude: Longtitude ,  
+           Category: Category , 
+           Tags: Tags
+         });
+         return prepare(await CustomerProblem.findOne({_id: CustomerProblem.insertedIds[1]}))
        }
        /**
         * Ending for Freelance
