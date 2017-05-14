@@ -143,6 +143,7 @@ export const typeDefs =  [`
         DetailWork(_id: String): Works
         listFreelancelocation(Latitude: Float! , Longtitude: Float): [User]
         GetFreelancelocation(_id:String!): User
+        ListFreelanceAcceptWork(_id:String!): CustomerProblemPost
 
         #Co-op
         listCategory: [Category]
