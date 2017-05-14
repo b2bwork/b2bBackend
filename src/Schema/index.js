@@ -122,6 +122,7 @@ export const typeDefs =  [`
 
       type CustomerProblemPost{
         _id: String
+        CustomerId: String
         DetailProblem: String
         ImageProblem: [String]
         Latitude: Float
