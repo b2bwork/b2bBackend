@@ -130,6 +130,12 @@ export const typeDefs =  [`
         Category: String
         Tags: [String]
       }
+      type FreelanceAcceptWork{
+        _id: String
+        CustomerProblemId: String
+        FreelanceId: String 
+        QoutePrice: Int
+      }
 
       type Query {
 
@@ -143,7 +149,7 @@ export const typeDefs =  [`
         DetailWork(_id: String): Works
         listFreelancelocation(Latitude: Float! , Longtitude: Float): [User]
         GetFreelancelocation(_id:String!): User
-        ListFreelanceAcceptWork(_id:String!): CustomerProblemPost
+        ListFreelanceAcceptWork(_id:String!): FreelanceAcceptWork
 
         #Co-op
         listCategory: [Category]
