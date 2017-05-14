@@ -368,7 +368,7 @@ const resolvers = {
          const insert = await CustomerProblem.insert({
            CustomerProblemId: filter.CustomerProblemId,
            WorkerId: filter.WorkerId,
-           QoutePrice: filter.QoutePrice
+           QoutePrice: parseInt(filter.QoutePrice)
            
          })
        }
