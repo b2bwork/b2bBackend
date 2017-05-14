@@ -106,9 +106,9 @@ const resolvers = {
             _id: ObjectId(_id)
           }))
         },
-        ListFreelanceAcceptWork: async (root,{_id}) =>{
-          return ListFreelanceAcceptWork.filter((x)=>{
-            return (x._id = _id)
+        ListFreelanceAcceptWork: (root,{_id}) =>{
+          return ListFreelanceAcceptWork.filter(function(x){
+            return (x._id == _id)
           })
 
         }
@@ -316,7 +316,7 @@ const resolvers = {
                 'expiration_month': parseInt(ExpireMonth),
                 'expiration_year': parseInt(ExpireYear)
               }
-};
+           };
           const Omise = omise.tokens.create(cardDetail).then(async (Token)=>{
              omise.customers.create({
                email: Email,
@@ -347,6 +347,30 @@ const resolvers = {
               return "Token cannot pass"
             }
           })
+       },
+       PostProblem: async (root,{CustomerId , DetailProblem , ImageProblem , Latitude , Longtitude ,  Category , Tags}) =>{
+         const postproblem = await CustomerProblem.insert({
+           CustomerId: CustomerId , 
+           DetailProblem: DetailProblem , 
+           ImageProblem: ImageProblem , 
+           Latitude: Latitude , 
+           Longtitude: Longtitude ,  
+           Category: Category , 
+           Tags: Tags
+         });
+         return prepare(await CustomerProblem.findOne({_id: CustomerProblem.insertedIds[1]}))
+       },
+       ChooseFreelanceSolve: async (root,{WorkerId}) =>{
+         const filter = ListFreelanceAcceptWork.filter((list)=>{
+           return (list.WorkerId == WorkerId)
+         })
+
+         const insert = await CustomerProblem.insert({
+           CustomerProblemId: filter.CustomerProblemId,
+           WorkerId: filter.WorkerId,
+           QoutePrice: filter.QoutePrice
+           
+         })
        }
       /**
          * Ending for Customer
@@ -452,18 +476,6 @@ const resolvers = {
               return "Token cannot pass"
             }
           })
-       },
-       PostProblem: async (root,{CustomerId , DetailProblem , ImageProblem , Latitude , Longtitude ,  Category , Tags}) =>{
-         const postproblem = await CustomerProblem.insert({
-           CustomerId: CustomerId , 
-           DetailProblem: DetailProblem , 
-           ImageProblem: ImageProblem , 
-           Latitude: Latitude , 
-           Longtitude: Longtitude ,  
-           Category: Category , 
-           Tags: Tags
-         });
-         return prepare(await CustomerProblem.findOne({_id: CustomerProblem.insertedIds[1]}))
        }
        /**
         * Ending for Freelance
