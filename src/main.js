@@ -378,6 +378,32 @@ const resolvers = {
 
        ,
        /**
+        * Beginning Co-Op
+        */
+        AddBankCard: async (root,{_id , BankCardId , Name , Email , BankBland , BankAccountName , BankNumber}) => {
+          const OmiseCreateRecipient = omise.recipients.create({
+                               'name': `${Name}`,
+                               'email': `${Email}`,
+                               'type': 'individual',
+                               'bank_account': {
+                                 'brand': `${BankBland}`,
+                                 'number': `${BankNumber}`,
+                                 'name': `${BankAccountName}`
+                               }
+                              }).then(async (recipient)=>{
+                                const insert = await User.updateOne(
+                                      {
+                                         _id: ObjectId(_id)
+                                      },{$set:{
+                                         TokenOmise: recipient.id
+                                      }
+                                    })
+                              })
+        },
+        /**
+         * Ending Co-Op
+         */
+       /**
         * Beginning for freelance
         */
        InsertWork: async (root,{CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
