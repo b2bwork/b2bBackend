@@ -16,6 +16,7 @@ export const typeDefs =  [`
         Verify: Boolean
         Money: Float
         TokenOmise: String
+        BankCardId: String
       }
 
       type Category{
@@ -189,10 +190,11 @@ export const typeDefs =  [`
         CheckActivateTransferMoney(_id:String! , WorkerId: String! , Token: String!): CustomerTransferMoney
         PostProblem( CustomerId: String , DetailProblem: String , ImageProblem: [String] , Latitude: Float , Longtitude: Float ,  Category: String , Tags: [String]): CustomerProblemPost
         ChooseFreelanceSolve(WorkerId: String!): FreelanceAcceptWork
+
       
 
         #CO-OP (Customer , Freelance )
-          #AddBankCard(): User
+          AddBankCard(_id: String! , BankCardId: String! , Name , Email: String! , BankBland: String! , BankAccountName: String! , BankNumber: String! ): User
           
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
@@ -202,6 +204,7 @@ export const typeDefs =  [`
         AddWorkSchedule(WorkId: String! , WorkName: String! , WorkerId: String! , WorkerName: String! , CustomerId: String! , CustomerName: String! , StartWorkDate: String! , FinishWorkDate: String!): Calendar
         CheckTransferMoney(_id:String! ,WorkerId:String!, Token:String!): User
         AcceptCustomerProblem(CustomerProblemId: String! , WorkerId: String! , QoutePrice: Int!): FreelanceAcceptWork
+
 
         #Admin
         InsertCategory(Name: String! , Image: String! ): Category
