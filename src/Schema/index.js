@@ -6,7 +6,7 @@ export const typeDefs =  [`
         Username: String
         Password: String
         Name: String
-        Image: String 
+        ProfileImage: String 
         BirthDate: String 
         Age: Int
         Latitude: Float

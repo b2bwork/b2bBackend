@@ -380,7 +380,7 @@ const resolvers = {
        /**
         * Beginning Co-Op
         */
-        AddBankCard: async (root,{_id , BankCardId , Name , Email , BankBland , BankAccountName , BankNumber}) => {
+        AddBankCard: (root,{_id , BankCardId , Name , Email , BankBland , BankAccountName , BankNumber}) => {
           const OmiseCreateRecipient = omise.recipients.create({
                                'name': `${Name}`,
                                'email': `${Email}`,
@@ -400,9 +400,26 @@ const resolvers = {
                                     })
                               })
         },
+        CheckVerifyBank: (root,{_id, TokenOmise}) =>{
+          const checkverifybank = omise.recipients.retrieve(TokenOmise).then(async (tokens) =>{
+            if(tokens.verify == true){
+              await User.updateOne({
+                _id: ObjectId(_id)
+              },{
+                $set: {
+                   VerifyOmiseToken: true
+              }
+            })
+     
+            }else if(tokens.verify == false){
+              return [{return: "not verify"}]
+            }
+          })
+        }
         /**
          * Ending Co-Op
          */
+        ,
        /**
         * Beginning for freelance
         */
@@ -551,11 +568,31 @@ const resolvers = {
       resolvers
     })
     const subscriptionManager = new SubscriptionManager({schema, pubsub});
+    let storage = multer.diskStorage({
+              dest: function (req, file, cb) {
+                 cb(null, 'Images/Profile/')
+             },
+             rename: function (req, file, cb) {
+                 cb(null, file.originalname+ Date.now())
+              }
+         })
+ 
+    let upload = multer({ storage: storage })
+
 
     const app = express()
 
-
     app.use(cors())
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    app.use('/upload/Profile',upload.single('Profile'),async (req, res, next)=>{
+          const addRefImage = await User.updateOne({
+            _id: ObjectId(req.body.UserId)
+          },{$set: {
+            ProfileImage: req.file.filename
+          }});
+    })
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
     app.use('/graphiql', graphiqlExpress({
