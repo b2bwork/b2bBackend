@@ -586,11 +586,11 @@ const resolvers = {
     app.post('/upload/Profile',upload.single('Profile'),async (req, res, next)=>{
       console.log(req.body);
       console.log(req.file);
-      res.send('Complete')
+      res.send(`Complete <img src="${req.file.path}" >`)
          const addRefImage = await User.updateOne({
             _id: ObjectId(req.body.UserId)
           },{$set: {
-            ProfileImage: Date.now() + req.file.originalname
+            ProfileImage: `${req.file.path}`
           }});
     })
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
