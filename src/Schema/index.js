@@ -195,8 +195,8 @@ export const typeDefs =  [`
       
 
         #CO-OP (Customer , Freelance )
-          AddBankCard(_id: String! , BankCardId: String! , Name , Email: String! , BankBland: String! , BankAccountName: String! , BankNumber: String! ): User
-          CheckVerifyBank(_id: String! , TokenOmise: String!);
+          AddBankCard(_id: String! , BankCardId: String! , Name:String! , Email: String! , BankBland: String! , BankAccountName: String! , BankNumber: String! ): User
+          CheckVerifyBank(_id: String! , TokenOmise: String!):User
           
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
