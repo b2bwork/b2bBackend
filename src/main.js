@@ -569,7 +569,7 @@ const resolvers = {
     })
     const subscriptionManager = new SubscriptionManager({schema, pubsub});
     const storage = multer.diskStorage({
-                       destination: __dirname + '/../Images/Profile/' ,
+                       destination: __dirname + '/../Images/' ,
                        filename: function (req, file, cb) {
                             cb(null , Date.now() + file.originalname)
                         }
@@ -583,12 +583,21 @@ const resolvers = {
     app.use(cors())
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.post('/upload/Profile',upload.single('Profile'),async (req, res, next)=>{
+    app.post('/upload/ProfileImage',upload.single('Profile'),async (req, res, next)=>{
       res.send(`Complete <img src="../Images/Profile/${req.file.name}" >`)
          const addRefImage = await User.updateOne({
             _id: ObjectId(req.body.UserId)
           },{$set: {
             ProfileImage: `${req.file.name}`
+          }});
+    })
+
+    app.post('/upload/ReviewImage',upload.array('ReviewImage',8),async (req, res, next)=>{
+      //res.send(`Complete <img src="../Images/Review/${req.file.name}" >`)
+         const addRefImage = await Review.updateOne({
+            _id: ObjectId(req.body.ReviewId)
+          },{$set: {
+            Image: `${req.file.name}`
           }});
     })
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
