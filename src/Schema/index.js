@@ -52,7 +52,8 @@ export const typeDefs =  [`
         ReviewerImage: String
         Reviewdata: String
         Star: Int
-        Image: [String]
+        ImageBefore: [String]
+        ImageAfter: [String]
       }
 
       type Works {
