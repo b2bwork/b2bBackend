@@ -592,12 +592,19 @@ const resolvers = {
           }});
     })
 
-    app.post('/upload/ReviewImage',upload.array('ReviewImage',8),async (req, res, next)=>{
-      //res.send(`Complete <img src="../Images/Review/${req.file.name}" >`)
+    app.post('/upload/ReviewImageBefore',upload.array('ReviewImage',8),async (req, res, next)=>{
          const addRefImage = await Review.updateOne({
             _id: ObjectId(req.body.ReviewId)
           },{$set: {
-            Image: `${req.file.name}`
+            ImageBefore: `${req.file.name}`
+          }});
+    })
+
+    app.post('/upload/ReviewImageAfter',upload.array('ReviewImage',8),async (req, res, next)=>{
+         const addRefImage = await Review.updateOne({
+            _id: ObjectId(req.body.ReviewId)
+          },{$set: {
+            ImageAfter: `${req.file.name}`
           }});
     })
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
