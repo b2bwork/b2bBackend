@@ -51,12 +51,6 @@ const resolvers = {
         getuser: async (root, {_id}) => {
           return prepare(await User.findOne(ObjectId(_id)))
         },
-        login: async (root,{Username,Password}) =>{
-          return prepare(await User.findOne({
-            Username: Username,
-            Password: Password
-          }));
-        },
         CheckUsername: async (root,{Username}) => {
           return prepare(await User.findOne({
             Username: Username
@@ -166,10 +160,11 @@ const resolvers = {
         /**
          * Beginning for Customer
          */
-        register: async (root, {Username,Password,Name,Image,BirthDate,Age}) => {
+        register: async (root, {Username,Password,Email,Name,Image,BirthDate,Age}) => {
           const res = await User.insert({
             Username: Username,
             Password: Password,
+			Email: Email
             Name: Name,
             Image: Image,
             BirthDate: BirthDate,
@@ -415,6 +410,12 @@ const resolvers = {
               return [{return: "not verify"}]
             }
           })
+        },
+        login: async (root,{Username,Password}) =>{
+          return prepare(await User.findOne({
+            Username: Username,
+            Password: Password
+          }));
         }
         /**
          * Ending Co-Op
@@ -607,6 +608,7 @@ const resolvers = {
             ImageAfter: `${req.file.name}`
           }});
     })
+    
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
     app.use('/graphiql', graphiqlExpress({

@@ -5,6 +5,7 @@ export const typeDefs =  [`
         _id: String
         Username: String
         Password: String
+		Email: String
         Name: String
         ProfileImage: String 
         BirthDate: String 
@@ -145,7 +146,6 @@ export const typeDefs =  [`
 
         #Customer
         getuser(_id: String): User
-        login(Username: String , Password: String): User
         CheckUsername(Username:String): User
         listReview(WorkId: String): [Review]
         GetDetailReview(_id: String ): DetailReview
@@ -178,7 +178,7 @@ export const typeDefs =  [`
       type Mutation {
 
         #Customer
-        register(Username: String! , Password: String! , Name: String! , BirthDate: String! , Age:Int!): User
+        register(Username: String! , Password: String! , Email: String! , Name: String! , BirthDate: String! , Age:Int!): User
         InsertReview(WorkId: String! , ReviewerName: String! , Reviewdata: String! , Star: Int! , Image: [String]!): DetailReview
         InsertVerifyIdCard(_id: String , ImageIdCard: String!): User
         InsertMessage(UserId1: String! , UserId2: String! , Messages: String!): ChatMessage
@@ -198,6 +198,7 @@ export const typeDefs =  [`
         #CO-OP (Customer , Freelance )
           AddBankCard(_id: String! , BankCardId: String! , Name:String! , Email: String! , BankBland: String! , BankAccountName: String! , BankNumber: String! ): User
           CheckVerifyBank(_id: String! , TokenOmise: String!):User
+          login(Username: String , Password: String): User
           
         #Freelance 
         InsertWork(CategoryName: String! , WorkName: String! , CoverImage: String! , WorkerName: String! , WorkerId: String! , ScopeWork: String! , Workdays : Int! , DetailWork: String! , ExperienceWorker: String! , Price: Int! , TagWork : [String]! ): Works
