@@ -160,16 +160,15 @@ const resolvers = {
         /**
          * Beginning for Customer
          */
-        register: async (root, {Username,Password,Email,Name,Image,BirthDate,Age}) => {
+        register: async (root, {Username,Password,Email,Name,Image,BirthDate}) => {
           const res = await User.insert({
             Username: Username,
             Password: Password,
-			Email: Email
+			      Email: Email,
             Name: Name,
             Image: Image,
             BirthDate: BirthDate,
-            Age: Age,
-            Money: null
+            Money: 0
           });
           return prepare(await User.findOne({_id: res.insertedIds[1]}))
         },
