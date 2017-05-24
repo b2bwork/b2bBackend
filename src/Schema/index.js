@@ -5,7 +5,7 @@ export const typeDefs =  [`
         _id: String
         Username: String
         Password: String
-		Email: String
+        Email: String
         Name: String
         ProfileImage: String 
         BirthDate: String 
@@ -15,7 +15,7 @@ export const typeDefs =  [`
         ImageIdCard: String
         ImageBank: String
         VerifyIdentify: Boolean
-        Money: Float
+        Money: String
         TokenOmise: String
         BankCardId: String
         VerifyOmiseToken: Boolean
