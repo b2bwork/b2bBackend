@@ -1,5 +1,6 @@
-import {MongoClient, ObjectId} from 'mongodb'
+const complession = require('compression');
 import express from 'express'
+import {MongoClient, ObjectId} from 'mongodb'
 import bodyParser from 'body-parser'
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
@@ -11,13 +12,15 @@ import fs from 'fs';
 import { createServer } from 'http';
 import {PubSub, SubscriptionManager} from "graphql-subscriptions";
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import {createcard} from './omise';
+import {createcard} from 'omise';
 const URL = 'http://localhost';
 const pubsub = new PubSub();
 const omise = require('omise')({
   'publicKey': OMISE_PUBLIC_KEY,
   'secretKey': OMISE_SECRET_KEY
 })
+var passportjs = require('passport');
+var session = require('express-session');
 
 const prepare = (o) => {
   o._id = o._id.toString()
@@ -161,16 +164,31 @@ const resolvers = {
          * Beginning for Customer
          */
         register: async (root, {Username,Password,Email,Name,Image,BirthDate}) => {
-          const res = await User.insert({
-            Username: Username,
-            Password: Password,
-			      Email: Email,
-            Name: Name,
-            Image: Image,
-            BirthDate: BirthDate,
-            Money: 0
-          });
-          return prepare(await User.findOne({_id: res.insertedIds[1]}))
+
+          const checkUser = await User.findOne({Username: Username}).then( async (data)=>{
+             
+             if(data.Username != null ){
+
+                 return {_id: `hasUser`}
+
+               }else if(data.Username == null){
+
+                   const res = await User.insert({
+                       Username: Username,
+                       Password: Password,
+			                 Email: Email,
+                       Name: Name,
+                       Image: Image,
+                       BirthDate: BirthDate,
+                       Money: 0
+                     });  
+
+              return {_id: `registerd`}
+          }     
+          }
+          )     
+
+          return checkUser._id;
         },
         InsertReview: async (root,args) =>{
         const res = await Review.insert(args);
@@ -579,9 +597,10 @@ const resolvers = {
 
 
     const app = express()
-
+    app.use(complession())
     app.use(cors())
     app.use(bodyParser.json());
+    app.use(passportjs.initialize())
     app.use(bodyParser.urlencoded({ extended: true }));
     app.post('/upload/ProfileImage',upload.single('Profile'),async (req, res, next)=>{
       res.send(`Complete <img src="../Images/Profile/${req.file.name}" >`)
