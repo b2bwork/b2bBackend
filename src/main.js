@@ -166,13 +166,11 @@ const resolvers = {
         register: async (root, {Username,Password,Email,Name,Image,BirthDate}) => {
 
           const checkUser = await User.findOne({Username: Username}).then( async (data)=>{
-             
-             if(data.Username != null ){
+               if(data!= null ){
 
                  return {_id: `hasUser`}
 
-               }else if(data.Username == null){
-
+               }else if(data == null){
                    const res = await User.insert({
                        Username: Username,
                        Password: Password,
@@ -187,7 +185,6 @@ const resolvers = {
           }     
           }
           )     
-
           return checkUser._id;
         },
         InsertReview: async (root,args) =>{
