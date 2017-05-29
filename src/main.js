@@ -5,7 +5,10 @@ import bodyParser from 'body-parser'
 import {graphqlExpress, graphiqlExpress} from 'graphql-server-express'
 import {makeExecutableSchema} from 'graphql-tools'
 import cors from 'cors'
-import {MONGO_URL,EXPRESS_PORT,UPLOAD_PATH,WEBSOCKET_PORT,OMISE_SECRET_KEY,OMISE_PUBLIC_KEY} from './config';
+import {MONGO_URL,EXPRESS_PORT,
+       UPLOAD_PATH,WEBSOCKET_PORT,
+       OMISE_SECRET_KEY,OMISE_PUBLIC_KEY,
+       GOOGLE_CLIENT_ID,GOOGLE_SECRET_KEY,GOOGLE_CALLBACK_URL} from './config';
 import {typeDefs} from './Schema/index';
 import multer from 'multer';
 import fs from 'fs';
@@ -21,6 +24,7 @@ const omise = require('omise')({
 })
 var passportjs = require('passport');
 var session = require('express-session');
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const prepare = (o) => {
   o._id = o._id.toString()
@@ -30,6 +34,7 @@ const prepare = (o) => {
 
 export const start = async () => {
   try {
+
 const mongodb = await MongoClient.connect(MONGO_URL);
 
 //mongoDB
@@ -43,6 +48,27 @@ const Qoute = mongodb.collection('QouteWork');
 const Calendar = mongodb.collection('Calendar');
 const CustomerTranferMoney = mongodb.collection('CustomerTranferMoney');
 const CustomerProblem = mongodb.collection('CustomerProblem')
+
+//passportjs
+passportjs.use(new GoogleStrategy({
+                    clientID: GOOGLE_CLIENT_ID,
+                    clientSecret: GOOGLE_SECRET_KEY,
+                    callbackURL: GOOGLE_CALLBACK_URL
+                },async function (accessToken, refreshToken, profile, done) {
+                      let checkToken = await User.findOne({ GoogleUserId: profile.id }).then(async (data) => {
+                        if(data == null ){
+                            await User.insert({GoogleID: profile.id,
+                                               Money: 0});
+                          return 'Registered';
+                        }else if(data != null){
+                          return 'Loged';
+                        }
+                      });
+                      done(null,profile);
+                      return checkToken;
+                      
+                      
+         }))
 
 //Graphql data
 let ListFreelanceAcceptWork = [];
@@ -168,7 +194,7 @@ const resolvers = {
           const checkUser = await User.findOne({Username: Username}).then( async (data)=>{
                if(data!= null ){
 
-                 return {_id: `hasUser`}
+                 return {_id: 'hasUser'}
 
                }else if(data == null){
                    const res = await User.insert({
@@ -181,7 +207,7 @@ const resolvers = {
                        Money: 0
                      });  
 
-              return {_id: `registerd`}
+              return {_id: 'registerd'}
           }     
           }
           )     
@@ -582,6 +608,7 @@ const resolvers = {
       typeDefs,
       resolvers
     })
+
     const subscriptionManager = new SubscriptionManager({schema, pubsub});
     const storage = multer.diskStorage({
                        destination: __dirname + '/../Images/' ,
@@ -623,6 +650,7 @@ const resolvers = {
             ImageAfter: `${req.file.name}`
           }});
     })
+
     
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
