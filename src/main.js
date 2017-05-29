@@ -651,6 +651,11 @@ const resolvers = {
           }});
     })
 
+    app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
+    app.get('/auth/google/callback', passportjs.authenticate('google', { failureRedirect: '/login' }),
+            function(req, res) {
+                 res.redirect('/');
+        });
     
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
