@@ -56,10 +56,36 @@ passportjs.use(new GoogleStrategy({
                     clientID: GOOGLE_CLIENT_ID,
                     clientSecret: GOOGLE_SECRET_KEY,
                     callbackURL: GOOGLE_CALLBACK_URL
-                },async function (accessToken, refreshToken, profile, done) {
-                      let checkToken = await User.findOne({ GoogleUserID: profile.id }).then(async (data) => {
+                },async (accessToken, refreshToken, profile, done) => {
+                  console.log(profile);
+                       let checkToken = await User.findOne({ GoogleUserID: profile.id }).then(async (data) => {
                         if(data == null ){
-                            await User.insert({GoogleUserID: profile.id,
+                            await User.insert(
+                               {GoogleUserID: profile.id,
+                                Name: displayName,
+                                ProfileImage: profile.photos.value,
+                                Money: 0});
+                          return 'Registered';
+                        }else if(data != null){
+                          return 'Loged';
+                        }
+                      });
+                      done(null,profile);
+                      return checkToken;
+                      
+                      
+         }))
+
+passportjs.use(new facebookAuth({
+                    clientID: FACEBOOK_APP_ID,
+                    clientSecret: FACEBOOK_APP_KEY,
+                    callbackURL: FACEBOOK_CALLBACK_URL
+                },async function (accessToken, refreshToken, profile, done) {
+                  console.log(profile);
+                     let checkToken = await User.findOne({ FacebookUserID: profile.id }).then(async (data) => {
+                        if(data == null ){
+                            await User.insert({FacebookUserID: profile.id,
+                                               Name: profile.displayName,
                                                Money: 0});
                           return 'Registered';
                         }else if(data != null){
@@ -656,11 +682,9 @@ const resolvers = {
     })
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-    app.get('/auth/google/callback', passportjs.authenticate('google', { failureRedirect: '/login' }),
-            function(req, res) {
-                 res.redirect('/');
-        });
-    
+    app.get('/auth/google/callback', passportjs.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
+    app.get('/auth/facebook', passportjs.authenticate('facebook',{scope: ['public_profile','user_birthday','email']}));
+    app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
     app.use('/graphiql', graphiqlExpress({
