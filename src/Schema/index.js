@@ -3,6 +3,8 @@ export const typeDefs =  [`
 
       type User {
         _id: String
+        GoogleUserID: String
+        FacebookUserID: String
         Username: String
         Password: String
         Email: String
