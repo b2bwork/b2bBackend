@@ -8,7 +8,8 @@ import cors from 'cors'
 import {MONGO_URL,EXPRESS_PORT,
        UPLOAD_PATH,WEBSOCKET_PORT,
        OMISE_SECRET_KEY,OMISE_PUBLIC_KEY,
-       GOOGLE_CLIENT_ID,GOOGLE_SECRET_KEY,GOOGLE_CALLBACK_URL} from './config';
+       GOOGLE_CLIENT_ID,GOOGLE_SECRET_KEY,GOOGLE_CALLBACK_URL,
+       FACEBOOK_APP_ID,FACEBOOK_APP_KEY,FACEBOOK_CALLBACK_URL} from './config';
 import {typeDefs} from './Schema/index';
 import multer from 'multer';
 import fs from 'fs';
@@ -25,6 +26,7 @@ const omise = require('omise')({
 var passportjs = require('passport');
 var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var facebookAuth = require('passport-facebook')
 
 const prepare = (o) => {
   o._id = o._id.toString()
@@ -55,9 +57,9 @@ passportjs.use(new GoogleStrategy({
                     clientSecret: GOOGLE_SECRET_KEY,
                     callbackURL: GOOGLE_CALLBACK_URL
                 },async function (accessToken, refreshToken, profile, done) {
-                      let checkToken = await User.findOne({ GoogleUserId: profile.id }).then(async (data) => {
+                      let checkToken = await User.findOne({ GoogleUserID: profile.id }).then(async (data) => {
                         if(data == null ){
-                            await User.insert({GoogleID: profile.id,
+                            await User.insert({GoogleUserID: profile.id,
                                                Money: 0});
                           return 'Registered';
                         }else if(data != null){
@@ -69,6 +71,8 @@ passportjs.use(new GoogleStrategy({
                       
                       
          }))
+
+      
 
 //Graphql data
 let ListFreelanceAcceptWork = [];
