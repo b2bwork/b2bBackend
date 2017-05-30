@@ -24,9 +24,8 @@ const omise = require('omise')({
   'secretKey': OMISE_SECRET_KEY
 })
 var passportjs = require('passport');
-var session = require('express-session');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var facebookAuth = require('passport-facebook')
+var facebookAuth = require('passport-facebook');
 
 const prepare = (o) => {
   o._id = o._id.toString()
@@ -62,7 +61,7 @@ passportjs.use(new GoogleStrategy({
                         if(data == null ){
                             await User.insert(
                                {GoogleUserID: profile.id,
-                                Name: displayName,
+                                Name: profile.displayName,
                                 ProfileImage: profile.photos.value,
                                 Money: 0});
                           return 'Registered';
@@ -682,9 +681,15 @@ const resolvers = {
     })
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-    app.get('/auth/google/callback', passportjs.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
+    app.get('/auth/google/callback',passportjs.authenticate('google', { failureRedirect: '/login' , session: false}),
+         function(req, res) {res.redirect('http://localhost:3000');
+      });
     app.get('/auth/facebook', passportjs.authenticate('facebook',{scope: ['public_profile','user_birthday','email']}));
-    app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
+    app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login', session: false }),
+         function(req, res) {
+           console.log(res);
+           res.redirect('http://localhost:3000');
+      });
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
     app.use('/graphiql', graphiqlExpress({
