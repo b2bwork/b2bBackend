@@ -688,7 +688,7 @@ const resolvers = {
     app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login', session: false }),
          function(req, res) {
            console.log(res);
-           res.redirect('http://localhost:3000');
+           res.redirect('http://localhost:3000/' + res.user.id);
       });
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
