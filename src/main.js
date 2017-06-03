@@ -54,23 +54,21 @@ const CustomerProblem = mongodb.collection('CustomerProblem')
 passportjs.use(new GoogleStrategy({
                     clientID: GOOGLE_CLIENT_ID,
                     clientSecret: GOOGLE_SECRET_KEY,
-                    callbackURL: GOOGLE_CALLBACK_URL
+                    callbackURL: GOOGLE_CALLBACK_URL,
                 },async (accessToken, refreshToken, profile, done) => {
-                  console.log(profile);
                        let checkToken = await User.findOne({ GoogleUserID: profile.id }).then(async (data) => {
                         if(data == null ){
                             await User.insert(
                                {GoogleUserID: profile.id,
                                 Name: profile.displayName,
                                 ProfileImage: profile.photos.value,
-                                Money: 0});
+                                Money: '0'});
                           return 'Registered';
                         }else if(data != null){
                           return 'Loged';
                         }
                       });
-                      done(null,profile);
-                      return checkToken;
+                      done(null,{UserID: profile.id , Username: profile.displayName,ProfileImage: profile.photos[0].value});
                       
                       
          }))
@@ -78,26 +76,26 @@ passportjs.use(new GoogleStrategy({
 passportjs.use(new facebookAuth({
                     clientID: FACEBOOK_APP_ID,
                     clientSecret: FACEBOOK_APP_KEY,
-                    callbackURL: FACEBOOK_CALLBACK_URL
+                    callbackURL: FACEBOOK_CALLBACK_URL,
+                    profileFields: ['id', 'displayName', 'photos', 'email']
                 },async function (accessToken, refreshToken, profile, done) {
                   console.log(profile);
                      let checkToken = await User.findOne({ FacebookUserID: profile.id }).then(async (data) => {
                         if(data == null ){
                             await User.insert({FacebookUserID: profile.id,
                                                Name: profile.displayName,
-                                               Money: 0});
+                                               //ProfileImage: profile.photos.value,
+                                               Money: '0'});
                           return 'Registered';
                         }else if(data != null){
                           return 'Loged';
                         }
                       });
-                      done(null,profile);
-                      return checkToken;
+                      done(null,{UserID: profile.id , Username: profile.displayName , });//ProfileImage: profile.photos[0].value});
                       
                       
-         }))
-
-      
+         }));
+     
 
 //Graphql data
 let ListFreelanceAcceptWork = [];
@@ -640,7 +638,7 @@ const resolvers = {
 
     const subscriptionManager = new SubscriptionManager({schema, pubsub});
     const storage = multer.diskStorage({
-                       destination: __dirname + '/../Images/' ,
+                       destination: __dirname + '/Images/' ,
                        filename: function (req, file, cb) {
                             cb(null , Date.now() + file.originalname)
                         }
@@ -681,15 +679,17 @@ const resolvers = {
     })
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
-    app.get('/auth/google/callback',passportjs.authenticate('google', { failureRedirect: '/login' , session: false}),
-         function(req, res) {res.redirect('http://localhost:3000');
-      });
-    app.get('/auth/facebook', passportjs.authenticate('facebook',{scope: ['public_profile','user_birthday','email']}));
-    app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login', session: false }),
+    app.get('/auth/google/callback',passportjs.authenticate('google', { session: false}),
          function(req, res) {
-           console.log(res);
-           res.redirect('http://localhost:3000/' + res.user.id);
-      });
+           console.log(req.user);
+           res.redirect(`http://localhost:3000/loged/${req.user.UserID}`);
+          });
+    app.get('/auth/facebook', passportjs.authenticate('facebook',{scope: ['public_profile','email']}));
+    app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { session: false }),
+         function(req, res) {
+           console.log(req.user);
+           res.redirect(`http://localhost:3000/loged/${req.user.UserID}`);          
+          });
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
     app.use('/graphiql', graphiqlExpress({
