@@ -63,7 +63,7 @@ passportjs.use(new GoogleStrategy({
                                 Name: profile.displayName,
                                 ProfileImage: profile.photos.value,
                                 Money: '0'});
-                          return 'Registered';
+                          return 'registered';
                         }else if(data != null){
                           return 'Loged';
                         }
@@ -234,11 +234,11 @@ const resolvers = {
                        Money: 0
                      });  
 
-              return {_id: 'registerd'}
+              return {_id: 'registered'}
           }     
           }
           )     
-          return checkUser._id;
+          return checkUser;
         },
         InsertReview: async (root,args) =>{
         const res = await Review.insert(args);
@@ -678,7 +678,7 @@ const resolvers = {
           }});
     })
 
-    app.post('/upload/addwork',upload.array('file',8),async (req, res, next)=>{
+    app.post('/upload/addwork',upload.any(),async (req, res, next)=>{
          /**const addRefImage = await Review.updateOne({
             _id: ObjectId(req.body.ReviewId)
           },{$set: {
@@ -686,6 +686,7 @@ const resolvers = {
           }});*/
           console.log(req.body)
           console.log(req.files);
+          res.send({ responseText: req.file });
     })
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
