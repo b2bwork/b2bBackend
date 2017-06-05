@@ -678,6 +678,16 @@ const resolvers = {
           }});
     })
 
+    app.post('/upload/addwork',upload.array('file',8),async (req, res, next)=>{
+         /**const addRefImage = await Review.updateOne({
+            _id: ObjectId(req.body.ReviewId)
+          },{$set: {
+            ImageAfter: `${req.file.name}`
+          }});*/
+          console.log(req.body)
+          console.log(req.files);
+    })
+
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
     app.get('/auth/google/callback',passportjs.authenticate('google', { session: false}),
          function(req, res) {
