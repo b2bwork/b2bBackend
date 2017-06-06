@@ -504,8 +504,10 @@ const resolvers = {
            TagWork: TagWork,
            Verify: false
 
-         }).then()
-         return prepare(await Works.findOne({_id: insertWork.insertedIds[1]}))
+         }).then((data) => {
+           return {_id: data.insertedId}
+         })
+         return insertWork
        },
        EditWork: async (root,{_id , CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
          const editWork = await Works.updateOne({
@@ -684,7 +686,6 @@ const resolvers = {
           }});*/
           console.log(req.body)
           console.log(req.files);
-          res.send({ responseText: req.file });
     })
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
