@@ -491,12 +491,10 @@ const resolvers = {
        /**
         * Beginning for freelance
         */
-       InsertWork: async (root,{CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
-         const insertWork = await Works.insert({
+       InsertWork: async (root,{CategoryName , WorkName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
+         const insertWork = await Works.insertOne({
            CategoryName: CategoryName,
            WorkName: WorkName,
-           CoverImage: CoverImage,
-           WorkerName: WorkerName,
            WorkerId: WorkerId,
            ScopeWork: ScopeWork,
            Workdays: Workdays,
@@ -506,7 +504,7 @@ const resolvers = {
            TagWork: TagWork,
            Verify: false
 
-         })
+         }).then()
          return prepare(await Works.findOne({_id: insertWork.insertedIds[1]}))
        },
        EditWork: async (root,{_id , CategoryName , WorkName , CoverImage , WorkerName , WorkerId , ScopeWork, Workdays, DetailWork , ExperienceWorker , Price , TagWork }) =>{
