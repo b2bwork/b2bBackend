@@ -166,6 +166,7 @@ export const typeDefs =  [`
         #Co-op
         listCategory: [Category]
         listUnitCategory(CategoryName: String): [UnitCategory]
+        listUserProfile(_id: String!): User
 
         #Freelance
         listFreelanceWorks(WorkerId: String!): [Works]
