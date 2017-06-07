@@ -11,6 +11,8 @@ export const typeDefs =  [`
         Name: String
         ProfileImage: String 
         BirthDate: String 
+        Education: [String]
+        Skill: [String]
         Age: Int
         Latitude: Float
         Longtitude: Float
@@ -195,12 +197,12 @@ export const typeDefs =  [`
         PostProblem( CustomerId: String , DetailProblem: String , ImageProblem: [String] , Latitude: Float , Longtitude: Float ,  Category: String , Tags: [String]): CustomerProblemPost
         ChooseFreelanceSolve(WorkerId: String!): FreelanceAcceptWork
 
-      
 
         #CO-OP (Customer , Freelance )
           AddBankCard(_id: String! , BankCardId: String! , Name:String! , Email: String! , BankBland: String! , BankAccountName: String! , BankNumber: String! ): User
           CheckVerifyBank(_id: String! , TokenOmise: String!):User
           login(Username: String , Password: String): User
+          AddEducation(_id: String! , Education: [String]): User
           
         #Freelance 
         InsertWork(CategoryName: String , WorkName: String , WorkerId: String , ScopeWork: String , Workdays : Int , DetailWork: String , ExperienceWorker: String , Price: Int , TagWork : [String] ): Works
