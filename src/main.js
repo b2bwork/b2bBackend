@@ -170,7 +170,7 @@ const resolvers = {
        *  Begining for Co op
        */
       listUserProfile: async (root,{_id}) =>{
-        return prepare(await User.findOne({_id: _id}));
+        return prepare(await User.findOne({_id: ObjectId(_id)}));
 
       },
       /**
@@ -492,7 +492,7 @@ const resolvers = {
           }));
         },
         AddEducation: async (root,{_id , Education}) =>{
-          let add = await User.updateOne({_id: _id},
+          let add = await User.updateOne({_id: ObjectId(_id)},
               {$set: { Education: Education} }).then((data , err) => {
                 if(!err){
                   return {_id: 'added'}
@@ -503,12 +503,13 @@ const resolvers = {
               })
               return add
         },
-        AddBasicUserData: async (root,{_id ,FirstName , LastName , BirthDate , Telephone} ) =>{
-          let add = await User.updateOne({_id: _id},
+        AddBasicUserData: async (root,{_id ,FirstName , LastName , BirthDate ,Email, Telephone} ) =>{
+          let add = await User.updateOne({_id: ObjectId(_id)},
              {$set: {FirstName: FirstName ,
                      LastName: LastName ,
                      BirthDate: BirthDate , 
-                     Telephone: Telephone
+                     Telephone: Telephone,
+                     Email: Email
                     }})
              .then((data,err)=>{
                  if(!err){
