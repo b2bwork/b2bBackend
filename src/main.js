@@ -483,6 +483,18 @@ const resolvers = {
             Username: Username,
             Password: Password
           }));
+        },
+        AddEducation: async (root,{_id , Education}) =>{
+          let add = await User.updateOne({_id: _id},
+              {$push: {Education: {$each: [Education]}}}).then((data , err) => {
+                if(!err){
+                  return {_id: 'added'}
+                }else{
+                  console.log(err);
+                  return {_id: 'error'}
+                }
+              })
+              return add
         }
         /**
          * Ending Co-Op
