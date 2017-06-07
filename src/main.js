@@ -486,7 +486,7 @@ const resolvers = {
         },
         AddEducation: async (root,{_id , Education}) =>{
           let add = await User.updateOne({_id: _id},
-              {$push: {Education: {$each: [Education]}}}).then((data , err) => {
+              {$set: { Education: Education} }).then((data , err) => {
                 if(!err){
                   return {_id: 'added'}
                 }else{
@@ -495,6 +495,24 @@ const resolvers = {
                 }
               })
               return add
+        },
+        AddBasicUserData: async (root,{_id ,FirstName , LastName , BirthDate , Telephone} ) =>{
+          let add = await User.updateOne({_id: _id},
+             {$set: {FirstName: FirstName ,
+                     LastName: LastName ,
+                     BirthDate: BirthDate , 
+                     Telephone: Telephone
+                    }})
+             .then((data,err)=>{
+                 if(!err){
+                       return {_id: 'added'}
+                     }else{
+                       console.log(err);
+                       return {_id: 'error'}
+                     }
+               })
+
+            return add;   
         }
         /**
          * Ending Co-Op
