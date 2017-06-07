@@ -9,8 +9,11 @@ export const typeDefs =  [`
         Password: String
         Email: String
         Name: String
+        FirstName: String 
+        LastName: String 
         ProfileImage: String 
         BirthDate: String 
+        Telephone: String
         Education: [String]
         Skill: [String]
         Age: Int
@@ -203,6 +206,7 @@ export const typeDefs =  [`
           CheckVerifyBank(_id: String! , TokenOmise: String!):User
           login(Username: String , Password: String): User
           AddEducation(_id: String! , Education: [String]): User
+          AddBasicUserData(_id: String! ,FirstName: String , LastName: String , BirthDate: String , Telephone: String ):User
           
         #Freelance 
         InsertWork(CategoryName: String , WorkName: String , WorkerId: String , ScopeWork: String , Workdays : Int , DetailWork: String , ExperienceWorker: String , Price: Int , TagWork : [String] ): Works
