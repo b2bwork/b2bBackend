@@ -167,6 +167,13 @@ const resolvers = {
          */
         ,
       /**
+       *  Begining for Co op
+       */
+      listUserProfile: async (root,{_id}) =>{
+        return prepare(await User.findOne({_id: _id}));
+
+      },
+      /**
        *  Beginning for Freelance
        */
        listFreelanceWorks: async (root,{WorkerId}) =>{
