@@ -207,7 +207,7 @@ export const typeDefs =  [`
           CheckVerifyBank(_id: String! , TokenOmise: String!):User
           login(Username: String , Password: String): User
           AddEducation(_id: String! , Education: [String]): User
-          AddBasicUserData(_id: String! ,FirstName: String , LastName: String , BirthDate: String , Telephone: String ):User
+          AddBasicUserData(_id: String! ,FirstName: String , LastName: String , BirthDate: String , Email:String ,Telephone: String ):User
           
         #Freelance 
         InsertWork(CategoryName: String , WorkName: String , WorkerId: String , ScopeWork: String , Workdays : Int , DetailWork: String , ExperienceWorker: String , Price: Int , TagWork : [String] ): Works
