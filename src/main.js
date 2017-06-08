@@ -730,13 +730,13 @@ const resolvers = {
     app.get('/auth/google/callback',passportjs.authenticate('google', { session: false}),
          function(req, res) {
            console.log(req.user);
-           res.redirect(`http://localhost:3000/loged/${req.user.UserID}`);
+           res.redirect(`http://128.199.68.65:3000/loged/${req.user.UserID}`);
           });
     app.get('/auth/facebook', passportjs.authenticate('facebook',{scope: ['public_profile','email']}));
     app.get('/auth/facebook/callback', passportjs.authenticate('facebook', { session: false }),
          function(req, res) {
            console.log(req.user);
-           res.redirect(`http://localhost:3000/loged/${req.user.UserID}`);          
+           res.redirect(`http://128.199.68.65:3000/loged/${req.user.UserID}`);          
           });
     app.use('/graphql', bodyParser.json(), graphqlExpress({schema}))
 
