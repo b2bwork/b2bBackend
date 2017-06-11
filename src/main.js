@@ -692,11 +692,11 @@ const resolvers = {
     app.use(passportjs.initialize())
     app.use(bodyParser.urlencoded({ extended: true }));
     app.post('/upload/ProfileImage',upload.single('Profile'),async (req, res, next)=>{
-      res.send(`Complete <img src="../Images/Profile/${req.file.name}" >`)
+      res.send(`Complete <img src="/Images/${req.file.name}" >`)
          const addRefImage = await User.updateOne({
             _id: ObjectId(req.body.UserId)
           },{$set: {
-            ProfileImage: `${req.file.name}`
+            ProfileImage: `http://128.199.68.65:3001/Images/${req.file.name}`
           }});
     })
 
@@ -704,7 +704,7 @@ const resolvers = {
          const addRefImage = await Review.updateOne({
             _id: ObjectId(req.body.ReviewId)
           },{$set: {
-            ImageBefore: `${req.file.name}`
+            ImageBefore: `http://128.199.68.65:3001/Images/${req.file.name}`
           }});
     })
 
