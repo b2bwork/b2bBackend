@@ -493,8 +493,8 @@ const resolvers = {
         },
         AddBank: async (root,{_id , Bank , BranchBank , BankNumber }) =>{
           let add = await User.updateOne({_id: ObjectId(_id)},
-              {$set: { Bank: Bank
-                       BranchBank: BranchBank
+              {$set: { Bank: Bank,
+                       BranchBank: BranchBank,
                        BankNumber: BankNumber } }).then((data , err) => {
                 if(!err){
                   return {_id: 'added'}
