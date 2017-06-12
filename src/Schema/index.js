@@ -20,12 +20,15 @@ export const typeDefs =  [`
         Latitude: Float
         Longtitude: Float
         ImageIdCard: String
-        ImageBank: String
         VerifyIdentify: Boolean
         Money: String
         TokenOmise: String
         BankCardId: String
         VerifyOmiseToken: Boolean
+        Bank: String
+        BranchBank: String
+        BankNumber: String
+        ImageBank: String
       }
 
       type Category{
@@ -208,6 +211,7 @@ export const typeDefs =  [`
           login(Username: String , Password: String): User
           AddEducation(_id: String! , Education: [String]): User
           AddBasicUserData(_id: String! ,FirstName: String , LastName: String , BirthDate: String , Email:String ,Telephone: String ):User
+          AddBank(_id: String! , Bank: String! , BranchBank: String! , BankNumber: String! ):User
           
         #Freelance 
         InsertWork(CategoryName: String , WorkName: String , WorkerId: String , ScopeWork: String , Workdays : Int , DetailWork: String , ExperienceWorker: String , Price: Int , TagWork : [String] ): Works
