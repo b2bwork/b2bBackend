@@ -491,9 +491,11 @@ const resolvers = {
             Password: Password
           }));
         },
-        AddEducation: async (root,{_id , Education}) =>{
+        AddBank: async (root,{_id , Bank , BranchBank , BankNumber }) =>{
           let add = await User.updateOne({_id: ObjectId(_id)},
-              {$set: { Education: Education} }).then((data , err) => {
+              {$set: { Bank: Bank
+                       BranchBank: BranchBank
+                       BankNumber: BankNumber } }).then((data , err) => {
                 if(!err){
                   return {_id: 'added'}
                 }else{
