@@ -209,7 +209,6 @@ export const typeDefs =  [`
           AddBankCard(_id: String! , BankCardId: String! , Name:String! , Email: String! , BankBland: String! , BankAccountName: String! , BankNumber: String! ): User
           CheckVerifyBank(_id: String! , TokenOmise: String!):User
           login(Username: String , Password: String): User
-          AddEducation(_id: String! , Education: [String]): User
           AddBasicUserData(_id: String! ,FirstName: String , LastName: String , BirthDate: String , Email:String ,Telephone: String ):User
           AddBank(_id: String! , Bank: String! , BranchBank: String! , BankNumber: String! ):User
           
