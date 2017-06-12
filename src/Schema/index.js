@@ -14,8 +14,8 @@ export const typeDefs =  [`
         ProfileImage: String 
         BirthDate: String 
         Telephone: String
-        Education: [String]
         Skill: [String]
+        WorkExp: [String]
         Age: Int
         Latitude: Float
         Longtitude: Float
