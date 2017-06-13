@@ -214,7 +214,7 @@ export const typeDefs =  [`
           login(Username: String , Password: String): User
           AddBasicUserData(_id: String! ,FirstName: String , LastName: String , BirthDate: String , Email:String ,Telephone: String ):User
           AddBank(_id: String! , Bank: String! , BranchBank: String! , BankNumber: String! ):User
-          addIdCard():User
+          addIdCard(_id: String! , RealName: String! , Address: String , IdCardNumber: String):User
           
         #Freelance 
         InsertWork(CategoryName: String , WorkName: String , WorkerId: String , ScopeWork: String , Workdays : Int , DetailWork: String , ExperienceWorker: String , Price: Int , TagWork : [String] ): Works
