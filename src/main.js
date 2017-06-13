@@ -524,7 +524,7 @@ const resolvers = {
 
             return add;   
         },
-        addIdCard: async (root,{_id , RealName , Address , IdCardNumber}) =>{
+        AddIdCard: async (root,{_id , RealName , Address , IdCardNumber}) =>{
            let add = await User.updateOne({_id: ObjectId(_id)},
                {$set: {
                   RealName: RealName ,
