@@ -706,7 +706,7 @@ const resolvers = {
 
 
     const app = express()
-    app.use(express.static('Images'))
+    app.use('/image', express.static(__dirname +'/Images'))
     app.use(complession())
     app.use(cors())
     app.use(bodyParser.json());
