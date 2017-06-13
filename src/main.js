@@ -523,6 +523,24 @@ const resolvers = {
                })
 
             return add;   
+        },
+        addIdCard: async (root,{_id , RealName , Address , IdCardNumber}) =>{
+           let add = await User.updateOne({_id: ObjectId(_id)},
+               {$set: {
+                  RealName: RealName ,
+                  Address: Address , 
+                  IdCardNumber: IdCardNumber
+               }})
+              .then((data,err)=>{
+                 if(!err){
+                       return {_id: 'added'}
+                     }else{
+                       console.log(err);
+                       return {_id: 'error'}
+                     }
+               })
+
+            return add; 
         }
         /**
          * Ending Co-Op
