@@ -762,6 +762,21 @@ const resolvers = {
           res.send({ responseText: ImageBank });
     })
 
+    app.post('/upload/userIDcard',upload.any(),async (req, res, next)=>{
+      console.log(req.files[0]);
+         const ImageIDcard = await User.updateOne({
+            _id: ObjectId(req.body._id)
+          },{$set: {
+            ImageIdCard: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
+          }}).then((data)=>{
+            console.log(data)
+            return {_id: 'uploaded'}
+          }).catch(()=>{
+            return {_id: 'error'}
+          })
+          res.send({ responseText: ImageIDcard });
+    })
+
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
     app.get('/auth/google/callback',passportjs.authenticate('google', { session: false}),
