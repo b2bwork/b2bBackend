@@ -748,10 +748,7 @@ const resolvers = {
     })
     
     app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
-      console.log(req.body)
-      console.log(req.file);
-      console.log(req.files);
-         const ImageBank = await Review.updateOne({
+         const ImageBank = await User.updateOne({
             _id: ObjectId(req.body._id)
           },{$set: {
             ImageBank: `http://128.199.68.65:3001/Images/${req.file.name}`
