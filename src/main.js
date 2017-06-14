@@ -747,8 +747,10 @@ const resolvers = {
           console.log(req.files);
     })
     
-    app.post('/upload/userBank',upload.single('file'),async (req, res, next)=>{
+    app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
       console.log(req.body)
+      console.log(req.file);
+      console.log(req.files);
          const ImageBank = await Review.updateOne({
             _id: ObjectId(req.body._id)
           },{$set: {
