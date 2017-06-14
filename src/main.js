@@ -752,7 +752,7 @@ const resolvers = {
          const ImageBank = await User.updateOne({
             _id: ObjectId(req.body._id)
           },{$set: {
-            ImageBank: `http://128.199.68.65:3001/Images/${req.files.filename}`
+            ImageBank: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
           }}).then((data)=>{
             console.log(data)
             return {_id: 'uploaded'}
