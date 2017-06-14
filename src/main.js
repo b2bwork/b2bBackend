@@ -535,11 +535,10 @@ const resolvers = {
                  if(!err){
                        return {_id: 'added'}
                      }else{
-                       console.log(err);
                        return {_id: 'error'}
                      }
                })
-
+            console.log(add);
             return add; 
         }
         /**
