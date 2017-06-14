@@ -748,10 +748,11 @@ const resolvers = {
     })
     
     app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
+      console.log(req.files[0]);
          const ImageBank = await User.updateOne({
             _id: ObjectId(req.body._id)
           },{$set: {
-            ImageBank: `http://128.199.68.65:3001/Images/${req.files.name}`
+            ImageBank: `http://128.199.68.65:3001/Images/${req.files.filename}`
           }}).then((data)=>{
             console.log(data)
             return {_id: 'uploaded'}
