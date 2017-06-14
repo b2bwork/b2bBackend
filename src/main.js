@@ -706,7 +706,7 @@ const resolvers = {
 
 
     const app = express()
-    app.use('/image', express.static(__dirname +'/Images'))
+    app.use('/Images', express.static(__dirname +'/Images'))
     app.use(complession())
     app.use(cors())
     app.use(bodyParser.json());
@@ -746,6 +746,21 @@ const resolvers = {
           console.log(req.body)
           console.log(req.files);
     })
+    
+    app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
+         const ImageBank = await Review.updateOne({
+            _id: ObjectId(req.body.ReviewId)
+          },{$set: {
+            ImageBank: `http://128.199.68.65:3001/Images/${req.file.name}`
+          }}).then((data)=>{
+            return {_id: 'uploaded'}
+          }).catch(()=>{
+            return {_id: 'error'}
+          })
+
+          return ImageBank
+    })
+
 
     app.get('/auth/google',passportjs.authenticate('google', { scope: ['https://www.googleapis.com/auth/plus.login'] }));
     app.get('/auth/google/callback',passportjs.authenticate('google', { session: false}),
