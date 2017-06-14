@@ -747,9 +747,10 @@ const resolvers = {
           console.log(req.files);
     })
     
-    app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
+    app.post('/upload/userBank',upload.single('file'),async (req, res, next)=>{
+      console.log(req.body)
          const ImageBank = await Review.updateOne({
-            _id: ObjectId(req.body.ReviewId)
+            _id: ObjectId(req.body._id)
           },{$set: {
             ImageBank: `http://128.199.68.65:3001/Images/${req.file.name}`
           }}).then((data)=>{
@@ -757,8 +758,7 @@ const resolvers = {
           }).catch(()=>{
             return {_id: 'error'}
           })
-
-          return ImageBank
+          res.send({ responseText: ImageBank });
     })
 
 
