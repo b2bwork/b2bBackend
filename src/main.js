@@ -719,6 +719,7 @@ const resolvers = {
          });*/
           console.log(req.body)
           //console.log(req.files);
+          console.log(listImage);
           res.send({ responseText: 'tes' });
     })
     
