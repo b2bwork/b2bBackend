@@ -16,7 +16,7 @@ import fs from 'fs';
 import { createServer } from 'http';
 import {PubSub, SubscriptionManager} from "graphql-subscriptions";
 import { SubscriptionServer } from 'subscriptions-transport-ws';
-import {createcard} from 'omise';
+import {listImage} from './util';
 const URL = 'http://localhost';
 const pubsub = new PubSub();
 const omise = require('omise')({
@@ -713,11 +713,10 @@ const resolvers = {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.post('/upload/addwork',upload.any(),async (req, res, next)=>{
-         /*const addRefImage = await Works.updateOne({
-            _id: ObjectId(req.body._id)
-          },{$set: {
-            Image: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
-          }});*/
+         let listImage = listImage(req.files);
+         /*const addRefImage = await Works.insert({
+           Image: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
+         });*/
           console.log(req.body)
           //console.log(req.files);
           res.send({ responseText: 'tes' });
