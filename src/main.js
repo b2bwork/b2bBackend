@@ -716,10 +716,11 @@ const resolvers = {
          /*const addRefImage = await Works.updateOne({
             _id: ObjectId(req.body._id)
           },{$set: {
-            ImageAfter: `${req.file.name}`
+            Image: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
           }});*/
           console.log(req.body)
           console.log(req.files);
+          res.send({ responseText: 'tes' });
     })
     
     app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
