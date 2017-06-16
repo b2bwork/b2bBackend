@@ -719,7 +719,7 @@ const resolvers = {
             Image: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
           }});*/
           console.log(req.body)
-          console.log(req.files);
+          //console.log(req.files);
           res.send({ responseText: 'tes' });
     })
     
