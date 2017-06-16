@@ -711,34 +711,10 @@ const resolvers = {
     app.use(bodyParser.json());
     app.use(passportjs.initialize())
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.post('/upload/ProfileImage',upload.single('Profile'),async (req, res, next)=>{
-      res.send(`Complete <img src="/Images/${req.file.name}" >`)
-         const addRefImage = await User.updateOne({
-            _id: ObjectId(req.body.UserId)
-          },{$set: {
-            ProfileImage: `http://128.199.68.65:3001/Images/${req.file.name}`
-          }});
-    })
-
-    app.post('/upload/ReviewImageBefore',upload.array('ReviewImage',8),async (req, res, next)=>{
-         const addRefImage = await Review.updateOne({
-            _id: ObjectId(req.body.ReviewId)
-          },{$set: {
-            ImageBefore: `http://128.199.68.65:3001/Images/${req.file.name}`
-          }});
-    })
-
-    app.post('/upload/ReviewImageAfter',upload.array('ReviewImage',8),async (req, res, next)=>{
-         const addRefImage = await Review.updateOne({
-            _id: ObjectId(req.body.ReviewId)
-          },{$set: {
-            ImageAfter: `${req.file.name}`
-          }});
-    })
 
     app.post('/upload/addwork',upload.any(),async (req, res, next)=>{
-         /**const addRefImage = await Review.updateOne({
-            _id: ObjectId(req.body.ReviewId)
+         /*const addRefImage = await Works.updateOne({
+            _id: ObjectId(req.body._id)
           },{$set: {
             ImageAfter: `${req.file.name}`
           }});*/
