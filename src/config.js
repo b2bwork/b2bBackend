@@ -10,3 +10,4 @@ export const GOOGLE_CALLBACK_URL = 'http://128.199.68.65:3001/auth/google/callba
 export const FACEBOOK_APP_ID = '469914500007960';
 export const FACEBOOK_APP_KEY = 'f279dd35ee1bac272cc79147ff4c1ace';
 export const FACEBOOK_CALLBACK_URL = 'http://128.199.68.65:3001/auth/facebook/callback';
+export const IMAGE_URL = `http://128.199.68.65:3001/Images/`;
