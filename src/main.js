@@ -714,16 +714,18 @@ const resolvers = {
 
     app.post('/upload/addwork',upload.any(),async (req, res, next)=>{
          const addRefImage = await Works.insert({
-           Image: req.files.filename
+           Image: req.files
          }).then((data,err)=>{
            if(!err){
             console.log(data);
+            return {_id:data.insertedIds[0]}
            }else{
              console.log(err);
            }
-           
+           console.log(req.files);
+           console.log(addRefImage);
          });
-          res.send({ responseText: 'tes' });
+          res.send({ WorkId: addRefImage._id });
     })
     
     app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
