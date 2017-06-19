@@ -722,12 +722,11 @@ const resolvers = {
              console.log(err);
            }
          });
-            console.log(addRefImage.ops[0]);
-          res.send({ WorkId: addRefImage.ops._id });
+            console.log(addRefImage.ops[0]._id);
+          res.send({ WorkId: addRefImage.ops[0]._id });
     })
     
     app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
-      console.log(req.files[0]);
          const ImageBank = await User.updateOne({
             _id: ObjectId(req.body._id)
           },{$set: {
