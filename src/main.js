@@ -720,9 +720,9 @@ const resolvers = {
             console.log(data);
             return data
            }else{
-             //console.log(err);
+             console.log(err);
            }
-           console.log(addRefImage);
+           console.log(addRefImage.ops);
          });
           res.send({ WorkId: addRefImage._id });
     })
