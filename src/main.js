@@ -713,7 +713,6 @@ const resolvers = {
     app.use(bodyParser.urlencoded({ extended: true }));
 
     app.post('/upload/addwork',upload.any(),async (req, res, next)=>{
-         let listImage = await listImage(req.files);
          /*const addRefImage = await Works.insert({
            Image: `http://128.199.68.65:3001/Images/${req.files[0].filename}`
          });*/
