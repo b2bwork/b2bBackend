@@ -717,13 +717,12 @@ const resolvers = {
            Image: req.files
          }).then((data,err)=>{
            if(!err){
-            console.log(data);
             return data
            }else{
              console.log(err);
            }
-           console.log(addRefImage.ops);
          });
+            console.log(addRefImage.ops);
           res.send({ WorkId: addRefImage._id });
     })
     
