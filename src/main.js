@@ -722,7 +722,7 @@ const resolvers = {
              console.log(err);
            }
          });
-            console.log(addRefImage.ops._id);
+            console.log(addRefImage.ops[0]);
           res.send({ WorkId: addRefImage.ops._id });
     })
     
