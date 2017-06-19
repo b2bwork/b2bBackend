@@ -718,7 +718,7 @@ const resolvers = {
          }).then((data,err)=>{
            if(!err){
             console.log(data);
-            return {_id:data.insertedIds[0]}
+            return data
            }else{
              console.log(err);
            }
