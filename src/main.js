@@ -722,8 +722,7 @@ const resolvers = {
              console.log(err);
            }
          });
-            console.log(addRefImage.ops[0]._id);
-          res.send({ WorkId: addRefImage.ops[0]._id });
+          res.send( addRefImage.ops[0]._id );
     })
     
     app.post('/upload/userBank',upload.any(),async (req, res, next)=>{
